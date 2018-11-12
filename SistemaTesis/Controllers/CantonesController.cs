@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using SistemaTesis.Data;
 using SistemaTesis.Models;
 using SistemaTesis.Clases;
+using Microsoft.AspNetCore.Identity;
 
 namespace SistemaTesis.Controllers
 {
@@ -34,6 +35,16 @@ namespace SistemaTesis.Controllers
         public List<Provincia> getProvincias()
         {
             return cantonModels.getProvincias();
+        }
+
+        public List<IdentityError> agregarCanton(int id, string nombre, Boolean estado, int provincia, string funcion)
+        {
+            return cantonModels.agregarCanton(id, nombre, estado, provincia, funcion);
+        }
+
+        public List<object[]> filtrarCanton(int numPagina, string valor, string order)
+        {
+            return cantonModels.filtrarCanton(numPagina, valor, order);
         }
     }
 }

@@ -19,10 +19,10 @@ $().ready(() => {
     switch (URLactual.pathname) {
         case "/Provincias":
             filtrarProvincias(1, "nombre");
-            break;    
+            break;
         case "/Cantones":
             getProvincias(0, 0);
-            //filtrarCantones(1, "nombre");
+            filtrarCanton(1, "nombre");
             break;
     }
 });
@@ -259,10 +259,28 @@ var editarProvincia = () => {
 
 var idCanton;
 
-var getProvincias = () => {
+var getProvincias = (id, fun) => {
     var action = 'Cantones/getProvincias';
     var cantones = new Cantones("", "", "", action);
+    cantones.getProvincias(id, fun);
+}
 
+var agregarCanton = () => {
+    var action = 'Cantones/agregarCanton';
+    var nombre = document.getElementById("Nombre").value;
+    var estado = document.getElementById("Estado").checked;
+    var provincias = document.getElementById('ProvinciaCantones');
+    var provincia = provincias.options[provincias.selectedIndex].value;
+    var cantones = new Cantones(nombre, estado, provincia, action);
+    cantones.agregarCanton(idCanton, funcion);
+    funcion = 0;
+}
+
+var filtrarCanton = (numPagina, order) => {
+    var action = 'Cantones/filtrarCanton';
+    var valor = document.getElementById("filtrar").value;
+    var cantones = new Cantones(valor, "", "", action);
+    cantones.filtrarCanton(numPagina, order);
 }
 
 
