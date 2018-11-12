@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Cantones";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a data-toggle="modal" data-target="#modalCantones" class="btn btn-primary">Crear Cantón</a>
+</p>
+
+<div class="form-group">
+    <div class="col-md-6">
+        <input id="filtrar" name="filtrar" placeholder="Buscar" onKeyUp="" class="form-control" />
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a href="#" onclick=''>Nombre</a>
+            </th>
+            <th>
+                <a href="#" onclick=''>Estado</a>
+            </th>
+            <th>
+                <a href="#" onclick=''>Provincia</a>
+            </th>
+            <th align="center">
+                Opciones
+            </th>
+        </tr>
+    </thead>
+    <tbody id="resultSearch"></tbody>
+</table>
+
+<div id="paginado">
+
+</div>
+
+<!--Modal Agregar Canton-->
+<div class="modal fade" id="modalCantones" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Agregar canton</h4>
+            </div>
+            <div class="modal-body">
+                <form asp-action="">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="Nombre" class="col-md-2 control-label">Nombre</label>
+                            <div class="col-md-10">
+                                <input form="Nombre" id="Nombre" placeholder="Nombre" name="Nombre" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Estado" class="col-md-2 control-label">Estado</label>
+                            <div class="col-md-10 checkbox">
+                                <input type="checkbox" form="Estado" id="Estado" name="Estado" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <laber for="Provincia" class="col-md-2 control-label">Provincia</laber>
+                            <div class="col-md-10">
+                                <select id='ProvinciaCantones' class="form-control">
+                                    <option value='0'>[Seleccione una provincia...]</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <label id="mensaje" class="col-md-2 control-label"></label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="button" onclick="agregarCanton()" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal Estado-->
+
+

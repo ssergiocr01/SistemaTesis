@@ -1,8 +1,37 @@
-﻿// Write your JavaScript code.
+﻿// Funciones Generales
 
 $('#modalEditar').on('shown.bs.modal', function () {
     $('#myInput').focus()
-})
+});
+
+$('#modalProvincias').on('shown.bs.modal', function () {
+    $('#Nombre').focus();
+});
+
+$('#modalCantones').on('shown.bs.modal', function () {
+    $('#Nombre').focus();
+});
+
+$().ready(() => {
+    var URLactual = window.location;
+    document.getElementById("filtrar").focus();
+
+    switch (URLactual.pathname) {
+        case "/Provincias":
+            filtrarProvincias(1, "nombre");
+            break;    
+        case "/Cantones":
+            getProvincias(0, 0);
+            //filtrarCantones(1, "nombre");
+            break;
+    }
+});
+
+var funcion = 0;
+
+/*
+ * Mantenimiento Módulos de Usuarios
+ */
 
 function getUsuario(id, action) {
     $.ajax({
@@ -183,3 +212,59 @@ function crearUsuario(action) {
         }
     }
 }
+
+/*
+ * Mantenimiento Módulo Provincias
+ */
+
+var idProvincia;
+
+var agregarProvincia = () => {
+    var nombre = document.getElementById("Nombre").value;
+    var estados = document.getElementById('Estado');
+    var estado = estados.options[estados.selectedIndex].value;
+    if (funcion == 0) {
+        var action = 'Provincias/guardarProvincia';
+    } else {
+        var action = 'Provincias/editarProvincia';
+    }
+    var provincia = new Provincias(nombre, estado, action);
+    provincia.agregarProvincia(idProvincia, funcion);
+}
+
+var filtrarProvincias = (numPagina, order) => {
+    var valor = document.getElementById("filtrar").value;
+    var action = 'Provincias/filtrarProvincias';
+    var provincia = new Provincias(valor, "", action);
+    provincia.filtrarProvincias(numPagina, order);
+}
+
+var editarEstadoProvincia = (id, fun) => {
+    idProvincia = id;
+    funcion = fun;
+    var action = 'Provincias/getProvincias';
+    var provincia = new Provincias("", "", action);
+    provincia.qetProvincia(id, funcion);
+}
+
+var editarProvincia = () => {
+    var action = 'Provincias/editarProvincia';
+    var provincia = new Provincias("", "", action);
+    provincia.editarProvincia(idProvincia, funcion);
+}
+
+/*
+ * Mantenimiento Módulo Cantones
+ */
+
+var idCanton;
+
+var getProvincias = () => {
+    var action = 'Cantones/getProvincias';
+    var cantones = new Cantones("", "", "", action);
+
+}
+
+
+
+
