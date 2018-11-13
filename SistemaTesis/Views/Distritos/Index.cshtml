@@ -1,16 +1,16 @@
 ﻿@{
-    ViewData["Title"] = "Cantones";
+    ViewData["Title"] = "Distritos";
 }
 
 <h2>@ViewData["Title"]</h2>
 
 <p>
-    <a data-toggle="modal" data-target="#modalCantones" class="btn btn-primary">Crear Cantón</a>
+    <a data-toggle="modal" data-target="#modalDistritos" class="btn btn-primary">Crear Distrito</a>
 </p>
 
 <div class="form-group">
     <div class="col-md-6">
-        <input id="filtrar" name="filtrar" placeholder="Buscar" onKeyUp="filtrarCanton(1, 'nombre');" class="form-control" />
+        <input id="filtrar" name="filtrar" placeholder="Buscar" onKeyUp="filtrarDistrito(1, 'nombre');" class="form-control" />
     </div>
 </div>
 
@@ -18,13 +18,16 @@
     <thead>
         <tr>
             <th>
-                <a href="#" onclick='filtrarCanton(1, "nombre")'>Nombre</a>
+                <a href="#" onclick='filtrarDistrito(1, "nombre")'>Nombre</a>
             </th>
             <th>
-                <a href="#" onclick='filtrarCanton(1, "estado");'>Estado</a>
+                <a href="#" onclick='filtrarDistrito(1, "estado");'>Estado</a>
             </th>
             <th>
-                <a href="#" onclick='filtrarCanton(1, "provincia");'>Provincia</a>
+                <a href="#" onclick='filtrarDistrito(1, "provincia");'>Provincia</a>
+            </th>
+            <th>
+                <a href="#" onclick='filtrarDistrito(1, "canton");'>Canton</a>
             </th>
             <th align="center">
                 Opciones
@@ -39,12 +42,12 @@
 </div>
 
 <!--Modal Agregar Canton-->
-<div class="modal fade" id="modalCantones" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="modalDistritos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Agregar canton</h4>
+                <h4 class="modal-title" id="myModalLabel">Agregar distrito</h4>
             </div>
             <div class="modal-body">
                 <form asp-action="">
@@ -64,8 +67,17 @@
                         <div class="form-group">
                             <laber for="Provincia" class="col-md-2 control-label">Provincia</laber>
                             <div class="col-md-10">
-                                <select id='ProvinciaCantones' class="form-control">
+                                <select id='ProvinciaDistritos' class="form-control">
                                     <option value='0'>[Seleccione una provincia...]</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <laber for="Canton" class="col-md-2 control-label">Cantón</laber>
+                            <div class="col-md-10">
+                                <select id='CantonDistritos' class="form-control">
+                                    <option value='0'>[Seleccione un cantón...]</option>
 
                                 </select>
                             </div>
@@ -76,25 +88,25 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                <button type="button" onclick="agregarCanton()" class="btn btn-primary">Guardar</button>
+                <button type="button" onclick="agregarDistrito()" class="btn btn-primary">Guardar</button>
             </div>
         </div>
     </div>
 </div>
 
 <!--Modal Estado-->
-<div class="modal fade" id="ModalEstadoCanton" tabindex="-1" role="dialog">
+<div class="modal fade" id="ModalEstadoDistrito" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Actualizar estado</h4>
             </div>
             <div class="modal-body">
-                <h3 id="titleCanton" class="modal-title"></h3>
+                <h3 id="titleDistrito" class="modal-title"></h3>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                <button type="button" onclick="editarEstadoCanton1()" class="btn btn-primary">Aceptar</button>
+                <button type="button" onclick="editarEstadoDistrito1()" class="btn btn-primary">Aceptar</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

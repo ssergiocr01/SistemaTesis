@@ -27,9 +27,8 @@ namespace SistemaTesis.Controllers
 
         // GET: Cantones
         public async Task<IActionResult> Index()
-        {
-            var applicationDbContext = _context.Canton.Include(c => c.Provincia);
-            return View(await applicationDbContext.ToListAsync());
+        {            
+            return View();
         }
 
         public List<Provincia> getProvincias()
@@ -42,9 +41,19 @@ namespace SistemaTesis.Controllers
             return cantonModels.agregarCanton(id, nombre, estado, provincia, funcion);
         }
 
-        public List<object[]> filtrarCanton(int numPagina, string valor, string order)
+        public List<object[]> filtrarCanton(int numPagina, string valor, string order, int funcion)
         {
-            return cantonModels.filtrarCanton(numPagina, valor, order);
+            return cantonModels.filtrarCanton(numPagina, valor, order, funcion);
+        }
+
+        public List<Canton> getCantones(int id)
+        {
+            return cantonModels.getCantones(id);
+        }
+
+        public List<IdentityError> editarCanton(int id, string nombre, Boolean estado, int provincia, int funcion)
+        {
+            return cantonModels.editarCanton(id, nombre, estado, provincia, funcion);
         }
     }
 }

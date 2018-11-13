@@ -12,6 +12,10 @@ $('#modalCantones').on('shown.bs.modal', function () {
     $('#Nombre').focus();
 });
 
+$('#modalDistritos').on('shown.bs.modal', function () {
+    $('#Nombre').focus();
+})
+
 $().ready(() => {
     var URLactual = window.location;
     document.getElementById("filtrar").focus();
@@ -23,6 +27,11 @@ $().ready(() => {
         case "/Cantones":
             getProvincias(0, 0);
             filtrarCanton(1, "nombre");
+            break;
+        case "/Distritos":
+            getProvincias(0, 0);
+            getCantones(0, 0);
+            filtrarDistrito(1, "nombre");
             break;
     }
 });
@@ -266,9 +275,14 @@ var getProvincias = (id, fun) => {
 }
 
 var agregarCanton = () => {
-    var action = 'Cantones/agregarCanton';
+    if (funcion == 0) {
+        var action = 'Cantones/agregarCanton';
+    } else {
+        var action = "Cantones/editarCanton";
+    }
+
     var nombre = document.getElementById("Nombre").value;
-    var estado = document.getElementById("Estado").checked;
+    var estado = document.getElementById("Estado").checked
     var provincias = document.getElementById('ProvinciaCantones');
     var provincia = provincias.options[provincias.selectedIndex].value;
     var cantones = new Cantones(nombre, estado, provincia, action);
@@ -280,7 +294,40 @@ var filtrarCanton = (numPagina, order) => {
     var action = 'Cantones/filtrarCanton';
     var valor = document.getElementById("filtrar").value;
     var cantones = new Cantones(valor, "", "", action);
-    cantones.filtrarCanton(numPagina, order);
+    if (funcion == 0) {
+        cantones.filtrarCanton(numPagina, order);
+    }
+}
+
+var editarEstadoCanton = (id, fun) => {
+    funcion = fun;
+    idCanton = id;
+    var action = 'Cantones/getCantones';
+    var cantones = new Cantones("", "", "", action);
+    cantones.getCantones(id, fun);
+}
+
+var editarEstadoCanton1 = () => {
+    var action = 'Cantones/editarCanton';
+    var cantones = new Cantones("", "", "", action);
+    cantones.editarEstadoCanton(idCanton, funcion);
+}
+
+var restablecerCantones = () => {
+    var cantones = new Cantones("", "", "");
+    cantones.restablecer();
+}
+
+/*
+ * Mantenimiento Módulo Distritos
+ */
+
+var idCanton;
+
+var getDistritosProvincias = (id, fun) => {
+    var action = 'Distritos/getDistritos';
+    var distritos = new Distritos("", "", "", "", action);
+    distritos.getProvincias(id, fun);
 }
 
 

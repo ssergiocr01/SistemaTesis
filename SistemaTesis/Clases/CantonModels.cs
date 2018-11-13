@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using SistemaTesis.Data;
 using SistemaTesis.Models;
@@ -10,7 +9,6 @@ namespace SistemaTesis.Clases
 {
     public class CantonModels : ListObject
     {
-        private ApplicationDbContext context;
         private string code = "", des = "";
         private Boolean estados;
 
@@ -57,9 +55,14 @@ namespace SistemaTesis.Clases
             return errorList;
         }
 
-        public List<object[]> filtrarCanton(int numPagina, string valor, string order)
+        public List<Canton> getCantones(int id)
         {
-            int cant, numRegistros = 0, inicio = 0, reg_por_pagina = 5;
+            return context.Canton.Where(c => c.CantonID == id).ToList();
+        }
+
+        public List<object[]> filtrarCanton(int numPagina, string valor, string order, int funcion)
+        {
+            int cant, numRegistros = 0, inicio = 0, reg_por_pagina = 7;
             int can_paginas, pagina;
             string dataFilter = "", paginador = "", Estado = null;
 
@@ -75,7 +78,7 @@ namespace SistemaTesis.Clases
                     cantones = context.Canton.OrderBy(c => c.Estado).ToList();
                     break;
                 case "provincia":
-                    cantones = context.Canton.OrderBy(c => c.Provincia).ToList();
+                    cantones = context.Canton.OrderBy(c => c.Provincia.Nombre).ToList();
                     break;
             }
 
@@ -111,6 +114,9 @@ namespace SistemaTesis.Clases
                         "<td>" + item.Nombre + "</td>" +
                         "<td>" + Estado + "</td>" +
                         "<td>" + provincia[0].Nombre + "</td>" +
+                        "<td>" +
+                        dataBoton(item, funcion) +
+                        "</td>" +
                     "</tr>";
             }
             if (valor == "null")
@@ -135,6 +141,68 @@ namespace SistemaTesis.Clases
             object[] dataObj = { dataFilter, paginador };
             data.Add(dataObj);
             return data;
+        }
+
+        private string dataBoton(Canton item, int funcion)
+        {
+            String data = "";
+            if (funcion == 1)
+            {
+                data = "<a data-toggle='modal' data-target='#modalCantones' onclick='editarEstadoCanton(" + item.CantonID + ',' + 1 + ")'  " +
+                    "class='btn btn-warning'>Editar</a>" ;               
+            }
+            else
+            {
+                data = "<td>Error</td>";
+            }
+            return data;
+        }
+
+        public List<IdentityError> editarCanton(int id, string nombre, Boolean estado, int provinciaID, int funcion)
+        {
+            switch (funcion)
+            {
+                case 0:
+                    if (estado)
+                    {
+                        estados = false;
+                    }
+                    else
+                    {
+                        estados = true;
+                    }
+
+                    break;
+                case 1:
+                    estados = estado;
+                    break;
+            }
+            var canton = new Canton
+            {
+                CantonID = id,
+                Nombre = nombre,
+                Estado = estados,
+                ProvinciaID = provinciaID,
+            };
+            try
+            {
+                context.Update(canton);
+                context.SaveChanges();
+                code = "Save";
+                des = "Save";
+            }
+            catch (Exception ex)
+            {
+                code = "error";
+                des = ex.Message;
+            }
+            errorList.Add(new IdentityError
+            {
+                Code = code,
+                Description = des
+            });
+
+            return errorList;
         }
 
 

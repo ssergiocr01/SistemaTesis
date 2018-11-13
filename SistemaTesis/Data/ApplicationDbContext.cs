@@ -28,5 +28,7 @@ namespace SistemaTesis.Data
         public DbSet<Provincia> Provincia { get; set; }
 
         public DbSet<Canton> Canton { get; set; }
+
+        public DbSet<SistemaTesis.Models.Distrito> Distrito { get; set; }
     }
 }
