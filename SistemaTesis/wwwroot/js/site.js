@@ -29,8 +29,8 @@ $().ready(() => {
             filtrarCanton(1, "nombre");
             break;
         case "/Distritos":
-            getProvincias(0, 0);
-            getCantones(0, 0);
+            getDistritoProvincias(0, 0);
+            //getCantones(0, 0);
             filtrarDistrito(1, "nombre");
             break;
     }
@@ -322,14 +322,59 @@ var restablecerCantones = () => {
  * Mantenimiento Módulo Distritos
  */
 
-var idCanton;
+var idDistrito;
 
-var getDistritosProvincias = (id, fun) => {
-    var action = 'Distritos/getDistritos';
+var getDistritoProvincias = (id, fun) => {
+    var action = 'Distritos/getProvincias';
     var distritos = new Distritos("", "", "", "", action);
-    distritos.getProvincias(id, fun);
+    distritos.getDistritoProvincias(id, fun);
 }
 
+var agregarDistrito = () => {
+    if (funcion == 0) {
+        var action = 'Distritos/agregarDistrito';
+    } else {
+        var action = "Distritos/editarDistrito";
+    }
+
+    var nombre = document.getElementById("Nombre").value;
+    var estado = document.getElementById("Estado").checked
+    var provincias = document.getElementById('ProvinciaDistritos');
+    var provincia = provincias.options[provincias.selectedIndex].value;
+    var cantones = document.getElementById("CantonDistritos");
+    var canton = cantones.options[cantones.selectedIndex].value;
+    var distritos = new Distritos(nombre, estado, provincia, canton, action);
+    distritos.agregarDistrito(idDistrito, funcion);
+    funcion = 0;
+}
+
+var filtrarDistrito = (numPagina, order) => {
+    var action = 'Distritos/filtrarDistrito';
+    var valor = document.getElementById("filtrar").value;
+    var distritos = new Distritos(valor, "", "", "", action);
+    if (funcion == 0) {
+        distritos.filtrarDistrito(numPagina, order);
+    }
+}
+
+var editarEstadoDistrito = (id, fun) => {
+    funcion = fun;
+    idDistrito = id;
+    var action = 'Distritos/getDistritos';
+    var distritos = new Distritos("", "", "", "", action);
+    distritos.getDistritos(id, fun);
+}
+
+var editarEstadoDistrito1 = () => {
+    var action = 'Distritos/editarDistrito';
+    var distritos = new Distritos("", "", "", "", action);
+    distritos.editarEstadoDistrito(idDistrito, funcion);
+}
+
+var restablecerDistritos = () => {
+    var distritos = new Distritos("", "","", "");
+    distritos.restablecer();
+}
 
 
 
