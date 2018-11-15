@@ -1,0 +1,140 @@
+﻿@{
+    ViewData["Title"] = "Asentamientos";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a data-toggle="modal" data-target="#modalAsentamientos" class="btn btn-primary">Crear Asentamiento</a>
+</p>
+
+<div class="form-group">
+    <div class="col-md-6">
+        <input id="filtrar" name="filtrar" placeholder="Buscar" onKeyUp="filtrarAsentamiento(1, 'nombre');" class="form-control" />
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a href="#" onclick='filtrarAsentamiento(1, "nombre")'>Nombre</a>
+            </th>
+            <th>
+                <a href="#" onclick='filtrarAsentamiento(1, "provincia")'>Provincia</a>
+            </th>
+            <th>
+                <a href="#" onclick='filtrarAsentamiento(1,"canton")'>Cant&oacute;n</a>
+            </th>
+            <th>
+                <a href="#" onclick='filtrarAsentamiento(1, "distrito")'>Distrito</a>
+            </th>
+            <th>
+                Direcci&oacute;n
+            </th>
+            <th>
+                Coordenadas
+            </th>
+            <th>
+                Propietario
+            </th>
+            <th>
+                <a href="#" onclick='filtrarAsentamiento(1, "tipoDocumento");'>Tipo de Documento</a>
+            </th>
+            <th>
+                N&uacute;mero de Documento
+            </th>
+            <th>
+                <a href="#" onclick='filtrarAsentamiento(1, "ocupacion");'>Fecha de Ocupaci&oacute;n</a>
+            </th>
+            <th>
+                <a href="#" onclick='filtrarAsentamiento(1, "numViviendas");'>N&uacute;mero de Viviendas</a>
+            </th>
+            <th align="center">
+                Opciones
+            </th>
+        </tr>
+    </thead>
+    <tbody id="resultSearch"></tbody>
+</table>
+
+<div id="paginado">
+
+</div>
+
+<!--Modal Agregar Distrito-->
+<div class="modal fade" id="modalAsentamientos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Agregar distrito</h4>
+            </div>
+            <div class="modal-body">
+                <form asp-action="">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="Nombre" class="col-md-2 control-label">Nombre</label>
+                            <div class="col-md-10">
+                                <input form="Nombre" id="Nombre" placeholder="Nombre" name="Nombre" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Direccion" class="col-md-2 control-label">Direcci&oacute;n</label>
+                            <div class="col-md-10">
+                                <input form="Direccion" id="Direccion" placeholder="Direccion" name="Direccion" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Estado" class="col-md-2 control-label">Estado</label>
+                            <div class="col-md-10 checkbox">
+                                <input type="checkbox" form="Estado" id="Estado" name="Estado" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <laber for="Provincia" class="col-md-2 control-label">Provincia</laber>
+                            <div class="col-md-10">
+                                <select id='ProvinciaDistritos' class="form-control">
+                                    <option value='0'>[Seleccione una provincia...]</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <laber for="Canton" class="col-md-2 control-label">Cantón</laber>
+                            <div class="col-md-10">
+                                <select id='CantonDistritos' class="form-control">
+                                    <option value='0'>[Seleccione un cantón...]</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <label id="mensaje" class="col-md-2 control-label"></label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="button" onclick="agregarDistrito()" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal Estado-->
+<div class="modal fade" id="ModalEstadoAsentamiento" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Actualizar estado</h4>
+            </div>
+            <div class="modal-body">
+                <h3 id="titleDistrito" class="modal-title"></h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button type="button" onclick="editarEstadoDistrito1()" class="btn btn-primary">Aceptar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

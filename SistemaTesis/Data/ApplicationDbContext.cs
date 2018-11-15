@@ -29,6 +29,10 @@ namespace SistemaTesis.Data
 
         public DbSet<Canton> Canton { get; set; }
 
-        public DbSet<SistemaTesis.Models.Distrito> Distrito { get; set; }
+        public DbSet<Distrito> Distrito { get; set; }
+
+        public DbSet<Asentamiento> Asentamiento { get; set; }
+
+        public DbSet<TipoDocumento> TipoDocumento { get; set; }
     }
 }

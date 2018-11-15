@@ -11,9 +11,10 @@ using System;
 namespace SistemaTesis.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181115174306_[Migracion-InicioAsentamientos-b]")]
+    partial class MigracionInicioAsentamientosb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -184,36 +185,25 @@ namespace SistemaTesis.Data.Migrations
                     b.Property<int>("AsentamientoID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ApellidosPropietario")
-                        .IsRequired();
-
                     b.Property<int>("CantonID");
 
                     b.Property<string>("Coordenadas");
 
-                    b.Property<string>("Direccion")
-                        .IsRequired();
+                    b.Property<string>("Direccion");
 
                     b.Property<int>("DistritoID");
-
-                    b.Property<bool>("Estado");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<string>("NombrePropietario")
-                        .IsRequired();
-
-                    b.Property<int>("NumDocumento");
-
                     b.Property<int>("NumViviendas");
 
                     b.Property<DateTime>("Ocupacion");
 
-                    b.Property<int>("ProvinciaID");
+                    b.Property<int>("PropietarioID");
 
-                    b.Property<int>("TipoDocumentoID");
+                    b.Property<int>("ProvinciaID");
 
                     b.HasKey("AsentamientoID");
 
@@ -222,8 +212,6 @@ namespace SistemaTesis.Data.Migrations
                     b.HasIndex("DistritoID");
 
                     b.HasIndex("ProvinciaID");
-
-                    b.HasIndex("TipoDocumentoID");
 
                     b.ToTable("Asentamiento");
                 });
@@ -288,24 +276,6 @@ namespace SistemaTesis.Data.Migrations
                     b.ToTable("Provincia");
                 });
 
-            modelBuilder.Entity("SistemaTesis.Models.TipoDocumento", b =>
-                {
-                    b.Property<int>("TipoDocumentoID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Descripcion");
-
-                    b.Property<bool>("Estado");
-
-                    b.Property<int?>("TipoDocumentoID1");
-
-                    b.HasKey("TipoDocumentoID");
-
-                    b.HasIndex("TipoDocumentoID1");
-
-                    b.ToTable("TipoDocumento");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -367,11 +337,6 @@ namespace SistemaTesis.Data.Migrations
                         .WithMany("Asentamientos")
                         .HasForeignKey("ProvinciaID")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("SistemaTesis.Models.TipoDocumento", "TipoDocumento")
-                        .WithMany()
-                        .HasForeignKey("TipoDocumentoID")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SistemaTesis.Models.Canton", b =>
@@ -393,13 +358,6 @@ namespace SistemaTesis.Data.Migrations
                         .WithMany("Distritos")
                         .HasForeignKey("ProvinciaID")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("SistemaTesis.Models.TipoDocumento", b =>
-                {
-                    b.HasOne("SistemaTesis.Models.TipoDocumento")
-                        .WithMany("TiposDocumentos")
-                        .HasForeignKey("TipoDocumentoID1");
                 });
 #pragma warning restore 612, 618
         }

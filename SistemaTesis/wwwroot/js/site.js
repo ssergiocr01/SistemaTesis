@@ -8,6 +8,10 @@ $('#modalProvincias').on('shown.bs.modal', function () {
     $('#Nombre').focus();
 });
 
+$('#modalTiposDocumentos').on('shown.bs.modal', function () {
+    $('#Descripcion').focus();
+})
+
 $('#modalCantones').on('shown.bs.modal', function () {
     $('#Nombre').focus();
 });
@@ -24,13 +28,15 @@ $().ready(() => {
         case "/Provincias":
             filtrarProvincias(1, "nombre");
             break;
+        case "/TiposDocumentos":
+            filtrarTiposDocumentos(1, "descripcion");
+            break;
         case "/Cantones":
             getProvincias(0, 0);
             filtrarCanton(1, "nombre");
             break;
         case "/Distritos":
-            getDistritoProvincias(0, 0);
-            //getCantones(0, 0);
+            getDistritoProvincias(0, 0);            
             filtrarDistrito(1, "nombre");
             break;
     }
@@ -260,6 +266,46 @@ var editarProvincia = () => {
     var action = 'Provincias/editarProvincia';
     var provincia = new Provincias("", "", action);
     provincia.editarProvincia(idProvincia, funcion);
+}
+
+/*
+ * Mantenimiento Módulo Tipos Documentos
+ */
+
+var idTipoDocumento;
+
+var agregarTipoDocumento = () => {
+    var descripcion = document.getElementById("Descripcion").value;
+    var estados = document.getElementById('Estado');
+    var estado = estados.options[estados.selectedIndex].value;
+    if (funcion == 0) {
+        var action = 'TiposDocumentos/guardarTipoDocumento';
+    } else {
+        var action = 'TiposDocumentos/editarTipoDocumento';
+    }
+    var tipoDocumento = new TiposDocumentos(descripcion, estado, action);
+    tipoDocumento.agregarTipoDocumento(idTipoDocumento, funcion);
+}
+
+var filtrarTiposDocumentos = (numPagina, order) => {
+    var valor = document.getElementById("filtrar").value;
+    var action = 'TiposDocumentos/filtrarTiposDocumentos';
+    var tipoDocumento = new TiposDocumentos(valor, "", action);
+    tipoDocumento.filtrarTiposDocumentos(numPagina, order);
+}
+
+var editarEstadoTipoDocumento = (id, fun) => {
+    idTipoDocumento = id;
+    funcion = fun;
+    var action = 'TiposDocumentos/getTiposDocumentos';
+    var tipoDocumento = new TiposDocumentos("", "", action);
+    tipoDocumento.qetTipoDocumento(id, funcion);
+}
+
+var editarTipoDocumento = () => {
+    var action = 'TiposDocumentos/editarTipoDocumento';
+    var tipoDocumento = new TiposDocumentos("", "", action);
+    tipoDocumento.editarTipoDocumento(idTipoDocumento, funcion);
 }
 
 /*

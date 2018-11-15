@@ -5,15 +5,17 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
+using Microsoft.EntityFrameworkCore.ValueGeneration;
 using SistemaTesis.Data;
 using System;
 
 namespace SistemaTesis.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181115190925_[Migration-Persona]")]
+    partial class MigrationPersona
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -184,36 +186,25 @@ namespace SistemaTesis.Data.Migrations
                     b.Property<int>("AsentamientoID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ApellidosPropietario")
-                        .IsRequired();
-
                     b.Property<int>("CantonID");
 
                     b.Property<string>("Coordenadas");
 
-                    b.Property<string>("Direccion")
-                        .IsRequired();
+                    b.Property<string>("Direccion");
 
                     b.Property<int>("DistritoID");
-
-                    b.Property<bool>("Estado");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<string>("NombrePropietario")
-                        .IsRequired();
-
-                    b.Property<int>("NumDocumento");
-
                     b.Property<int>("NumViviendas");
 
                     b.Property<DateTime>("Ocupacion");
 
-                    b.Property<int>("ProvinciaID");
+                    b.Property<int>("PropietarioID");
 
-                    b.Property<int>("TipoDocumentoID");
+                    b.Property<int>("ProvinciaID");
 
                     b.HasKey("AsentamientoID");
 
@@ -222,8 +213,6 @@ namespace SistemaTesis.Data.Migrations
                     b.HasIndex("DistritoID");
 
                     b.HasIndex("ProvinciaID");
-
-                    b.HasIndex("TipoDocumentoID");
 
                     b.ToTable("Asentamiento");
                 });
@@ -272,6 +261,51 @@ namespace SistemaTesis.Data.Migrations
                     b.ToTable("Distrito");
                 });
 
+            modelBuilder.Entity("SistemaTesis.Models.Institucion", b =>
+                {
+                    b.Property<int>("InstitucionID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Nombre");
+
+                    b.HasKey("InstitucionID");
+
+                    b.ToTable("Institucion");
+                });
+
+            modelBuilder.Entity("SistemaTesis.Models.Persona", b =>
+                {
+                    b.Property<int>("PersonaID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Apellidos")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
+                    b.Property<int?>("InstitucionID2");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("NumDocumento");
+
+                    b.Property<int>("TipoDocumentoID");
+
+                    b.HasKey("PersonaID");
+
+                    b.HasIndex("InstitucionID2");
+
+                    b.HasIndex("TipoDocumentoID");
+
+                    b.ToTable("Persona");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Persona");
+                });
+
             modelBuilder.Entity("SistemaTesis.Models.Provincia", b =>
                 {
                     b.Property<int>("ProvinciaID")
@@ -295,15 +329,32 @@ namespace SistemaTesis.Data.Migrations
 
                     b.Property<string>("Descripcion");
 
-                    b.Property<bool>("Estado");
-
-                    b.Property<int?>("TipoDocumentoID1");
-
                     b.HasKey("TipoDocumentoID");
 
-                    b.HasIndex("TipoDocumentoID1");
-
                     b.ToTable("TipoDocumento");
+                });
+
+            modelBuilder.Entity("SistemaTesis.Models.Evaluador", b =>
+                {
+                    b.HasBaseType("SistemaTesis.Models.Persona");
+
+                    b.Property<int>("InstitucionID");
+
+                    b.HasIndex("InstitucionID");
+
+                    b.ToTable("Evaluador");
+
+                    b.HasDiscriminator().HasValue("Evaluador");
+                });
+
+            modelBuilder.Entity("SistemaTesis.Models.Propietario", b =>
+                {
+                    b.HasBaseType("SistemaTesis.Models.Persona");
+
+
+                    b.ToTable("Propietario");
+
+                    b.HasDiscriminator().HasValue("Propietario");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -367,11 +418,6 @@ namespace SistemaTesis.Data.Migrations
                         .WithMany("Asentamientos")
                         .HasForeignKey("ProvinciaID")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("SistemaTesis.Models.TipoDocumento", "TipoDocumento")
-                        .WithMany()
-                        .HasForeignKey("TipoDocumentoID")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SistemaTesis.Models.Canton", b =>
@@ -395,11 +441,24 @@ namespace SistemaTesis.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("SistemaTesis.Models.TipoDocumento", b =>
+            modelBuilder.Entity("SistemaTesis.Models.Persona", b =>
                 {
-                    b.HasOne("SistemaTesis.Models.TipoDocumento")
-                        .WithMany("TiposDocumentos")
-                        .HasForeignKey("TipoDocumentoID1");
+                    b.HasOne("SistemaTesis.Models.Institucion")
+                        .WithMany("Personas")
+                        .HasForeignKey("InstitucionID2");
+
+                    b.HasOne("SistemaTesis.Models.TipoDocumento", "TipoDocumento")
+                        .WithMany("Personas")
+                        .HasForeignKey("TipoDocumentoID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SistemaTesis.Models.Evaluador", b =>
+                {
+                    b.HasOne("SistemaTesis.Models.Institucion", "Institucion")
+                        .WithMany()
+                        .HasForeignKey("InstitucionID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

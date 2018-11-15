@@ -11,6 +11,8 @@ namespace SistemaTesis.Models
 
         public string Descripcion { get; set; }
 
-        public ICollection<Persona> Personas { get; set; }
+        public Boolean Estado { get; set; }
+
+        public ICollection<TipoDocumento> TiposDocumentos { get; set; }
     }
 }

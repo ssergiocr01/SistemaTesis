@@ -1,20 +1,21 @@
 ﻿var localStorage = window.localStorage;
 
-class Provincias {
-    constructor(nombre, estado, action) {        
-        this.nombre = nombre;
+class TiposDocumentos {
+
+    constructor(descripcion, estado, action) {
+        this.descripcion = descripcion;
         this.estado = estado;
         this.action = action;
     }
 
-    agregarProvincia(id, funcion) {
-        if (this.nombre == "") {
-            document.getElementById("Nombre").focus();
+    agregarTipoDocumento(id, funcion) {
+        if (this.descripcion == "") {
+            document.getElementById("Descripcion").focus();
         } else {
             if (this.estado == "0") {
                 document.getElementById("mensaje").innerHTML = "Seleccione un estado";
-            } else {                
-                var nombre = this.nombre;
+            } else {
+                var descripcion = this.descripcion;
                 var estado = this.estado;
                 var action = this.action;
                 var mensaje = '';
@@ -22,7 +23,7 @@ class Provincias {
                     type: "POST",
                     url: action,
                     data: {
-                        id,  nombre, estado, funcion
+                        id, descripcion, estado, funcion
                     },
                     success: (response) => {
                         $.each(response, (index, val) => {
@@ -31,7 +32,7 @@ class Provincias {
                         if (mensaje === "Save") {
                             this.restablecer();
                         } else {
-                            document.getElementById("mensaje").innerHTML = "No se puede guardar la provincia";
+                            document.getElementById("mensaje").innerHTML = "No se puede guardar el tipo de documento";
                         }
                         //console.log(response);
                     }
@@ -40,8 +41,8 @@ class Provincias {
         }
     }
 
-    filtrarProvincias(numPagina, order) {
-        var valor = this.nombre;
+    filtrarTiposDocumentos(numPagina, order) {
+        var valor = this.descripcion;
         var action = this.action;
         if (valor == "") {
             valor = "null";
@@ -53,7 +54,6 @@ class Provincias {
             success: (response) => {
                 console.log(response);
                 $.each(response, (index, val) => {
-
                     $("#resultSearch").html(val[0]);
                     $("#paginado").html(val[1]);
                 });
@@ -62,7 +62,7 @@ class Provincias {
         });
     }
 
-    qetProvincia(id, funcion) {
+    qetTipoDocumento(id, funcion) {
         var action = this.action;
         $.ajax({
             type: "POST",
@@ -72,33 +72,33 @@ class Provincias {
                 console.log(response);
                 if (funcion == 0) {
                     if (response[0].estado) {
-                        document.getElementById("titleProvincia").innerHTML = "¿Está seguro(a) de desactivar la provincia? " + response[0].nombre;
+                        document.getElementById("titleTipoDocumento").innerHTML = "¿Está seguro(a) de desactivar el tipo de documento? " + response[0].descripcion;
                     } else {
-                        document.getElementById("titleProvincia").innerHTML = "¿Está seguro(a) de habilitar la provincia? " + response[0].nombre;
+                        document.getElementById("titleTipoDocumento").innerHTML = "¿Está seguro(a) de habilitar el tipo de documento? " + response[0].descripcion;
                     }
                 } else {
-                    document.getElementById("Nombre").value = response[0].nombre;
+                    document.getElementById("Descripcion").value = response[0].descripcion;
                     if (response[0].estado) {
                         document.getElementById("Estado").selectedIndex = 1;
                     } else {
                         document.getElementById("Estado").selectedIndex = 2;
                     }
                 }
-                localStorage.setItem("provincia", JSON.stringify(response));
+                localStorage.setItem("tipoDocumento", JSON.stringify(response));
             }
         });
     }
 
-    editarProvincia(id, funcion) {
+    editarTipoDocumento(id, funcion) {
         var action = this.action;
-        var response = JSON.parse(localStorage.getItem("provincia"));
-        var nombre = response[0].nombre;
+        var response = JSON.parse(localStorage.getItem("tipoDocumento"));
+        var descripcion = response[0].descripcion;
         var estado = response[0].estado;
-        localStorage.removeItem("provincia");
+        localStorage.removeItem("tipoDocumento");
         $.ajax({
             type: "POST",
             url: action,
-            data: { id, nombre, estado, funcion },
+            data: { id, descripcion, estado, funcion },
             success: (response) => {
                 console.log(response);
                 this.restablecer();
@@ -107,14 +107,11 @@ class Provincias {
     }
 
     restablecer() {
-        document.getElementById("Nombre").value = "";
+        document.getElementById("Descripcion").value = "";
         document.getElementById("mensaje").innerHTML = "";
         document.getElementById("Estado").selectedIndex = 0;
-        $('#modalProvincias').modal('hide');
-        $('#ModalEstadoProvincia').modal('hide');
-        filtrarProvincias(1, "nombre");
+        $('#modalTiposDocumentos').modal('hide');
+        $('#ModalEstadoTipoDocumento').modal('hide');
+        filtrarTiposDocumentos(1, "descripcion");
     }
 }
-
-
-

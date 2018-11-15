@@ -1,16 +1,16 @@
 ﻿@{
-    ViewData["Title"] = "Provincias";
+    ViewData["Title"] = "Tipos de documento";
 }
 
 <h2>@ViewData["Title"]</h2>
 
 <p>
-    <a data-toggle='modal' data-target='#modalProvincias' class='btn btn-primary'>Crear provincia</a>
+    <a data-toggle='modal' data-target='#modalTiposDocumentos' class='btn btn-primary'>Crear tipo de documento</a>
 </p>
 
 <div class="form-group">
     <div class="col-md-6">
-        <input id="filtrar" name="filtrar" placeholder="Buscar" onKeyUp="filtrarProvincias(1,'nombre');" class="form-control" />
+        <input id="filtrar" name="filtrar" placeholder="Buscar" onKeyUp="filtrarTiposDocumentos(1,'descripcion');" class="form-control" />
     </div>
 </div>
 
@@ -18,10 +18,10 @@
     <thead>
         <tr>            
             <th>
-                <a href="#" onclick='filtrarProvincias(1,"nombre")'>Nombre</a>
+                <a href="#" onclick='filtrarTiposDocumentos(1,"descripcion")'>Descripcion</a>
             </th>
             <th>
-                <a href="#" onclick='filtrarProvincias(1, "estado")'>Estado</a>
+                <a href="#" onclick='filtrarTiposDocumentos(1, "estado")'>Estado</a>
             </th>
             <th align="center">
                 Opciones
@@ -35,8 +35,8 @@
 
 </div>
 
-<!--Modal Agregar Provincia-->
-<div class="modal fade" id="modalProvincias" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!--Modal Agregar TipoDocumento-->
+<div class="modal fade" id="modalTiposDocumentos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -47,9 +47,9 @@
                 <form asp-action="">
                     <div class="form-horizontal">                        
                         <div class="form-group">
-                            <label for="Nombre" class="col-md-2 control-label">Nombre</label>
+                            <label for="Descripcion" class="col-md-2 control-label">Descripci&oacute;</label>
                             <div class="col-md-10">
-                                <input for="Nombre" id="Nombre" placeholder="Nombre" name="Nombre" class="form-control" />
+                                <input for="Descripcion" id="Descripcion" placeholder="Descripcion" name="Descripcion" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -68,25 +68,25 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                <button type="button" onclick="agregarProvincia()" class="btn btn-primary">Guardar</button>
+                <button type="button" onclick="agregarTipoDocumento()" class="btn btn-primary">Guardar</button>
             </div>
         </div>
     </div>
 </div>
 
-<!--Modal Estado-->
-<div class="modal fade" id="ModalEstadoProvincia" tabindex="-1" role="dialog">
+<!--Modal Estado Tipo Documento-->
+<div class="modal fade" id="ModalEstadoTipoDocumento" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 id="titleProvincia" class="modal-title"></h4>
+                <h4 id="titleTipoDocumento" class="modal-title"></h4>
             </div>
             <div class="modal-body">
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                <button type="button" onclick="editarProvincia()" class="btn btn-primary">Aceptar</button>
+                <button type="button" onclick="editarTipoDocumento()" class="btn btn-primary">Aceptar</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
