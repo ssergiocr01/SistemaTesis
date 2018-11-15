@@ -17,5 +17,9 @@ namespace SistemaTesis.Models
         public Boolean Estado { get; set; }
 
         public ICollection<Canton> Cantones { get; set; }
+
+        public ICollection<Distrito> Distritos { get; set; }
+
+        public ICollection<Asentamiento> Asentamientos { get; set; }
     }
 }

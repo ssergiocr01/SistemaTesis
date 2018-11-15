@@ -39,7 +39,7 @@ class Distritos {
                 }
             }
         });
-    }
+    }  
 
 
     agregarDistrito(id, funcion) {
@@ -171,7 +171,7 @@ class Distritos {
 }
 
 $('#ProvinciaDistritos').change(function () {
-    var provinciaID = $(this).val();
+    var provinciaID = $(this).val();    
     var count = 1;
     document.getElementById("CantonDistritos").innerHTML = "";
     $.ajax({
@@ -183,12 +183,10 @@ $('#ProvinciaDistritos').change(function () {
             document.getElementById('CantonDistritos').options[0] = new Option("[Seleccione un cantón]", 0);
             if (0 < response.length) {
                 for (var i = 0; i < response.length; i++) {
-                    document.getElementById('CantonDistritos').options[count] = new Option(response[i].nombre, response[i].provinciaID);
+                    document.getElementById('CantonDistritos').options[count] = new Option(response[i].nombre, response[i].cantonID);
                     count++;
                 }
             }
         }
     });
-
-
 });
