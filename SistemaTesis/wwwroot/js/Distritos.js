@@ -41,6 +41,7 @@ class Distritos {
         });
     }
 
+
     agregarDistrito(id, funcion) {
         if (this.nombre == "") {
             document.getElementById("Nombre").focus();

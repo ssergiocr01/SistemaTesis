@@ -8,7 +8,7 @@ namespace SistemaTesis.Models
 {
     public class Provincia
     {
-        public int ProvinciaID { get; set; }
+        public int ProvinciaID { get; set; }        
 
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [MaxLength(50, ErrorMessage = "El campo {0} no debe ser mayor a {1} carácteres")]

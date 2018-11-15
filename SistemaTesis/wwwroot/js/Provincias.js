@@ -1,7 +1,8 @@
 ﻿var localStorage = window.localStorage;
 
 class Provincias {
-    constructor(nombre, estado, action) {
+    constructor(codProvincia, nombre, estado, action) {
+        this.codProvincia = codProvincia;
         this.nombre = nombre;
         this.estado = estado;
         this.action = action;
@@ -14,6 +15,7 @@ class Provincias {
             if (this.estado == "0") {
                 document.getElementById("mensaje").innerHTML = "Seleccione un estado";
             } else {
+                var codProvincia = id;
                 var nombre = this.nombre;
                 var estado = this.estado;
                 var action = this.action;
@@ -22,7 +24,7 @@ class Provincias {
                     type: "POST",
                     url: action,
                     data: {
-                        id, nombre, estado, funcion
+                        id, codProvincia, nombre, estado, funcion
                     },
                     success: (response) => {
                         $.each(response, (index, val) => {

@@ -74,7 +74,7 @@ namespace SistemaTesis.Clases
 
         public List<object[]> filtrarDistrito(int numPagina, string valor, string order, int funcion)
         {
-            int cant, numRegistros = 0, inicio = 0, reg_por_pagina = 10;
+            int cant, numRegistros = 0, inicio = 0, reg_por_pagina = 12;
             int can_paginas, pagina;
             string dataFilter = "", paginador = "", Estado = null;
 

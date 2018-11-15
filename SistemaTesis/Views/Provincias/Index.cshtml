@@ -18,6 +18,9 @@
     <thead>
         <tr>
             <th>
+                <a href="#" onclick='filtrarProvincias(1,"codigo")'>Código</a>
+            </th>
+            <th>
                 <a href="#" onclick='filtrarProvincias(1,"nombre")'>Nombre</a>
             </th>
             <th>
@@ -46,6 +49,12 @@
             <div class="modal-body">
                 <form asp-action="">
                     <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="CodProvincia" class="col-md-2 control-label">Código</label>
+                            <div class="col-md-10">
+                                <input for="CodProvincia" id="CodProvincia" placeholder="CodProvincia" name="CodProvincia" class="form-control" />
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="Nombre" class="col-md-2 control-label">Nombre</label>
                             <div class="col-md-10">

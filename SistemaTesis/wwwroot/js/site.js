@@ -336,7 +336,6 @@ var agregarDistrito = () => {
     } else {
         var action = "Distritos/editarDistrito";
     }
-
     var nombre = document.getElementById("Nombre").value;
     var estado = document.getElementById("Estado").checked
     var provincias = document.getElementById('ProvinciaDistritos');
