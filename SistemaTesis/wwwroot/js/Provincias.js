@@ -53,7 +53,6 @@ class Provincias {
             success: (response) => {
                 console.log(response);
                 $.each(response, (index, val) => {
-
                     $("#resultSearch").html(val[0]);
                     $("#paginado").html(val[1]);
                 });

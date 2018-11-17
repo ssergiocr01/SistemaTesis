@@ -18,13 +18,28 @@ $('#modalCantones').on('shown.bs.modal', function () {
 
 $('#modalDistritos').on('shown.bs.modal', function () {
     $('#Nombre').focus();
-})
+});
+
+$('#modalAsentamientos').on('shown.bs.modal', function () {
+    $('#Nombre').focus();
+});
+
+$('#modalAmenazas').on('shown.bs.modal', function () {
+    $('#Descripcion').focus();
+});
 
 $().ready(() => {
     var URLactual = window.location;
     document.getElementById("filtrar").focus();
 
     switch (URLactual.pathname) {
+        case "/Asentamientos":
+            getAsentamientoProvincias(0, 0);
+            //filtrarAsentamientos(1, "nombre");
+            break;
+        case "/Amenazas":
+            filtrarAmenazas(1, "descripcion");
+            break;
         case "/Provincias":
             filtrarProvincias(1, "nombre");
             break;
@@ -36,7 +51,7 @@ $().ready(() => {
             filtrarCanton(1, "nombre");
             break;
         case "/Distritos":
-            getDistritoProvincias(0, 0);            
+            getDistritoProvincias(0, 0);
             filtrarDistrito(1, "nombre");
             break;
     }
@@ -268,6 +283,47 @@ var editarProvincia = () => {
     provincia.editarProvincia(idProvincia, funcion);
 }
 
+
+/*
+ * Mantenimiento Módulo Amenazas
+ */
+
+var idAmenaza;
+
+var agregarAmenaza = () => {
+    var descripcion = document.getElementById("Descripcion").value;
+    var porcentaje = document.getElementById("Porcentaje").value;
+    var estados = document.getElementById('Estado');
+    var estado = estados.options[estados.selectedIndex].value;
+    if (funcion == 0) {
+        var action = 'Amenazas/guardarAmenaza';
+    } else {
+        var action = 'Amenazas/editarAmenaza';
+    }
+    var amenaza = new Amenazas(descripcion, porcentaje, estado, action);
+    amenaza.agregarAmenaza(idAmenaza, funcion);
+}
+
+var filtrarAmenazas = (numPagina, order) => {
+    var valor = document.getElementById("filtrar").value;
+    var action = 'Amenazas/filtrarAmenazas';
+    var amenaza = new Amenazas(valor, "", "", action);
+    amenaza.filtrarAmenazas(numPagina, order);
+}
+
+var editarEstadoAmenaza = (id, fun) => {
+    idAmenaza = id;
+    funcion = fun;
+    var action = 'Amenazas/getAmenazas';
+    var amenaza = new Amenazas("", "", "", action);
+    provincia.qetProvincia(id, funcion);
+}
+
+var editarAmenaza = () => {
+    var action = 'Amenazas/editarAmenaza';
+    var amenaza = new Amenazas("", "", "", action);
+    amenaza.editarAmenaza(idAmenaza, funcion);
+}
 /*
  * Mantenimiento Módulo Tipos Documentos
  */
@@ -380,7 +436,7 @@ var agregarDistrito = () => {
     if (funcion == 0) {
         var action = 'Distritos/agregarDistrito';
     } else {
-        var action = "Distritos/editarDistrito";
+        var action = 'Distritos/editarDistrito';
     }
     var nombre = document.getElementById("Nombre").value;
     var estado = document.getElementById("Estado").checked
@@ -417,8 +473,74 @@ var editarEstadoDistrito1 = () => {
 }
 
 var restablecerDistritos = () => {
-    var distritos = new Distritos("", "","", "");
+    var distritos = new Distritos("", "", "", "");
     distritos.restablecer();
+}
+
+/*
+ * Mantenimiento Módulo Asentamientos
+ */
+
+var idAsentamiento;
+
+var getAsentamientoProvincias = (id, fun) => {
+    var action = 'Asentamientos/getProvincias';
+    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", action);
+    asentamientos.getAsentamientoProvincias(id, fun);
+}
+
+var agregarAsentamiento = () => {
+    if (funcion == 0) {
+        var action = 'Asentamientos/agregarAsentamiento';
+    } else {
+        var action = 'Asentamientos/editarAsentamiento';
+    }
+    var nombre = document.getElementById("Nombre").value;
+    var provincias = document.getElementById('ProvinciaDistritos');
+    var provincia = provincias.options[provincias.selectedIndex].value;
+    var cantones = document.getElementById('CantonDistritos');
+    var canton = cantones.options[cantones.selectedIndex].value;
+    var distritos = document.getElementById('DistritoAsentamientos');
+    var distrito = distritos.options[distritos.selectedIndex].value;
+    var direccion = document.getElementById("Direccion").value;
+    var coordenadas = document.getElementById("Coordenadas").value;
+    var nombrePropietario = document.getElementById("NombrePropietario").value;
+    var apellidosPropietario = document.getElementById("ApellidosPropietario").value;
+    var tiposDocumentos = document.getElementById('DistritoTipoDocumento');
+    var tipoDocumento = tiposDocumentos.options[tiposDocumentos.selectedIndex].value;
+    var numDocumento = document.getElementById("NumDocumento");
+    var estado = document.getElementById("Estado").checked
+    var asentamientos = new Asentamientos(nombre, estado, provincia, canton, distrito, direccion, coordenadas, nombrePropietario, apellidosPropietario, tipoDocumento, action);
+    asentamientos.agregarAsentamiento(idAsentamiento, funcion);
+    funcion = 0;
+}
+
+var filtrarAsentamiento = (numPagina, order) => {
+    var action = 'Asentamientos/filtrarAsentamiento';
+    var valor = document.getElementById("filtrar").value;
+    var asentamientos = new Asentamientos(valor, "", "", "", "", "", "", "", "", "", "", "", action);
+    if (funcion == 0) {
+        asentamientos.filtrarAsentamiento(numPagina, order);
+    }
+}
+
+var editarEstadoAsentamiento = (id, fun) => {
+    funcion = fun;
+    idAsentamiento = id;
+    var action = 'Asentamientos/getAsentamientos';
+    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", action);
+    asentamientos.getAsentamientos(id, fun);
+}
+
+var editarEstadoAsentamiento1 = () => {
+    var action = 'Asentamientos/editarAsentamiento';
+    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", action);
+    asentamientos.editarEstadoAsentamiento(idAsentamiento, funcion);
+}
+
+var restablecerAsentamientos = () => {
+    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "");
+    asentamientos.restablecer();
 }
 
 

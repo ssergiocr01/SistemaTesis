@@ -50,6 +50,9 @@
             <th>
                 <a href="#" onclick='filtrarAsentamiento(1, "numViviendas");'>N&uacute;mero de Viviendas</a>
             </th>
+            <th>
+                <a href="#" onclick='filtrarAsentamiento(1, "estado");'>Estado</a>
+            </th>            
             <th align="center">
                 Opciones
             </th>
@@ -68,7 +71,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Agregar distrito</h4>
+                <h4 class="modal-title" id="myModalLabel">Agregar asentamiento</h4>
             </div>
             <div class="modal-body">
                 <form asp-action="">
@@ -80,21 +83,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="Direccion" class="col-md-2 control-label">Direcci&oacute;n</label>
-                            <div class="col-md-10">
-                                <input form="Direccion" id="Direccion" placeholder="Direccion" name="Direccion" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="Estado" class="col-md-2 control-label">Estado</label>
-                            <div class="col-md-10 checkbox">
-                                <input type="checkbox" form="Estado" id="Estado" name="Estado" />
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <laber for="Provincia" class="col-md-2 control-label">Provincia</laber>
                             <div class="col-md-10">
-                                <select id='ProvinciaDistritos' class="form-control">
+                                <select id='ProvinciaAsentamientos' class="form-control">
                                     <option value='0'>[Seleccione una provincia...]</option>
 
                                 </select>
@@ -103,12 +94,67 @@
                         <div class="form-group">
                             <laber for="Canton" class="col-md-2 control-label">Cantón</laber>
                             <div class="col-md-10">
-                                <select id='CantonDistritos' class="form-control">
+                                <select id='CantonAsentamientos' class="form-control">
                                     <option value='0'>[Seleccione un cantón...]</option>
 
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="Distrito" class="col-md-2 control-label">Distrito</label>
+                            <div class="col-md-10">
+                                <select id="DistritoAsentamientos" class="form-control">
+                                    <option value='0'>[Seleccione un distrito...]</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Direccion" class="col-md-2 control-label">Direcci&oacute;n</label>
+                            <div class="col-md-10">
+                                <input form="Direccion" id="Direccion" placeholder="Direccion" name="Direccion" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Coordenadas" class="col-md-2 control-label">Coordenadas</label>
+                            <div class="col-md-10">
+                                <input form="Coordenadas" id="Coordenadas" placeholder="Coordenadas" name="Coordenadas" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="NombrePropietario" class="col-md-2 control-label">Nombre del Propietario</label>
+                            <div class="col-md-10">
+                                <input form="NombrePropietario" id="NombrePropietario" placeholder="NombrePropietario" name="NombrePropietario" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ApellidosPropietario" class="col-md-2 control-label">Apellidos del Propietario</label>
+                            <div class="col-md-10">
+                                <input form="ApellidosPropietario" id="ApellidosPropietario" placeholder="ApellidosPropietario" name="ApellidosPropietario" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="TipoDocumento" class="col-md-2 control-label">Tipo de Documento</label>
+                            <div class="col-md-10">
+                                <select id="DistritoTipoDocumento" class="form-control">
+                                    <option value='0'>[Seleccione un tipo de documento...]</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="NumDocumento" class="col-md-2 control-label">N&uacute;mero de documento</label>
+                            <div class="col-md-10">
+                                <input form="NumDocumento" id="NumDocumento" placeholder="NumDocumento" name="NumDocumento" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Estado" class="col-md-2 control-label">Estado</label>
+                            <div class="col-md-10 checkbox">
+                                <input type="checkbox" form="Estado" id="Estado" name="Estado" />
+                            </div>
+                        </div>
+
                         <label id="mensaje" class="col-md-2 control-label"></label>
                     </div>
                 </form>
@@ -133,7 +179,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                <button type="button" onclick="editarEstadoDistrito1()" class="btn btn-primary">Aceptar</button>
+                <button type="button" onclick="editarEstadoAsentamiento1()" class="btn btn-primary">Aceptar</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

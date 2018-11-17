@@ -12,6 +12,7 @@ namespace SistemaTesis.Clases
         //public List<Inscripcion> dataInscripcion = new List<Inscripcion>();
         public List<Canton> cantones = new List<Canton>();
         public List<Distrito> distritos = new List<Distrito>();
+        public List<Asentamiento> asentamientos = new List<Asentamiento>();
         //public List<Curso> misCursos = new List<Curso>();
         public List<IdentityError> errorList = new List<IdentityError>();
     }

@@ -11,9 +11,10 @@ using System;
 namespace SistemaTesis.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181117224109_[Migracion-Amenazas]")]
+    partial class MigracionAmenazas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -138,7 +139,7 @@ namespace SistemaTesis.Data.Migrations
 
                     b.Property<bool>("Estado");
 
-                    b.Property<double>("Porcentaje");
+                    b.Property<double>("Value");
 
                     b.HasKey("AmenazaID");
 

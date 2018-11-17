@@ -34,5 +34,7 @@ namespace SistemaTesis.Data
         public DbSet<Asentamiento> Asentamiento { get; set; }
 
         public DbSet<TipoDocumento> TipoDocumento { get; set; }
+
+        public DbSet<Amenaza> Amenaza { get; set; }
     }
 }
