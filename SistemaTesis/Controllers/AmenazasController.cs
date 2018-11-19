@@ -23,6 +23,11 @@ namespace SistemaTesis.Controllers
             amenazaModels = new AmenazaModels(context);
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         public List<object[]> filtrarAmenazas(int numPagina, string valor, string order)
         {
             return amenazaModels.filtrarAmenazas(numPagina, valor, order);

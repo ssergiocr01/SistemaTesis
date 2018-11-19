@@ -6,17 +6,20 @@ using System.Threading.Tasks;
 
 namespace SistemaTesis.Models
 {
-    public class Amenaza
+    public class CatalogoAmenaza
     {
-        public int AmenazaID { get; set; }
+        public int CatalogoAmenazaID { get; set; }
 
+        [Display(Name ="Opción")]
         [Required(ErrorMessage ="El campo {0} es requerido")]
         public string Descripcion { get; set; }
-        
+
         public double Porcentaje { get; set; }
 
         public Boolean Estado { get; set; }
 
-        public ICollection<CatalogoAmenaza> CatalogosAmenazas { get; set; }
+        public int AmenazaID { get; set; }
+
+        public Amenaza Amenaza { get; set; }
     }
 }

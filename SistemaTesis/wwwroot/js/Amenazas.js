@@ -8,7 +8,7 @@ class Amenazas {
         this.action = action;
     }
 
-    agregarProvincia(id, funcion) {
+    agregarAmenaza(id, funcion) {
         if (this.amenaza == "") {
             document.getElementById("Descripcion").focus();
         } else {
@@ -91,12 +91,12 @@ class Amenazas {
                             document.getElementById("Estado").selectedIndex = 2;
                         }
                     }
-                    localStorage.setItem("provincia", JSON.stringify(response));
+                    localStorage.setItem("amenaza", JSON.stringify(response));
                 }
             });
         }
 
-        editarProvincia(id, funcion) {
+        editarAmenaza(id, funcion) {
             var action = this.action;
             var response = JSON.parse(localStorage.getItem("amenaza"));
             var descripcion = response[0].descripcion;
@@ -115,12 +115,12 @@ class Amenazas {
         }
 
         restablecer() {
-            document.getElementById("Descripcion").value = "";
-            document.getElementById("Porcentaje").value = "";
+            document.getElementById("Descripcion").value = "";            
             document.getElementById("mensaje").innerHTML = "";
             document.getElementById("Estado").selectedIndex = 0;
+            document.getElementById("Porcentaje").value = "";
             $('#modalAmenazas').modal('hide');
             $('#ModalEstadoAmenaza').modal('hide');
-            filtrarProvincias(1, "descripcion");
+            filtrarAmenazas(1, "descripcion");
         }
     }

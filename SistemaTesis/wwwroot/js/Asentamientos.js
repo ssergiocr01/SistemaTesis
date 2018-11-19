@@ -48,6 +48,34 @@ class Asentamientos {
             }
         });
     } 
+
+    getAsentamientoTiposDocumentos(id, funcion) {
+        var action = this.action;
+        var count = 1;
+        $.ajax({
+            type: "POST",
+            url: action,
+            data: {},
+            success: (response) => {
+                //console.log(response);
+                document.getElementById('TipoDocumentoAsentamientos').options[0] = new Option("[Seleccione un tipo de documento]", 0);
+                if (0 < response.length) {
+                    for (var i = 0; i < response.length; i++) {
+                        if (0 == funcion) {
+                            document.getElementById('TipoDocumentoAsentamientos').options[count] = new Option(response[i].descripcion, response[i].tipoDocumentoID);
+                            count++;
+                        } else {
+                            if (id == response[i].provinciaID) {
+                                document.getElementById('TipoDocumentoAsentamientos').options[0] = new Option(response[i].descripcion, response[i].tipoDocumentoID);
+                                document.getElementById('TipoDocumentoAsentamientos').selectedIndex = 0;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    } 
 }
 
 $('#ProvinciaAsentamientos').change(function () {
@@ -56,7 +84,7 @@ $('#ProvinciaAsentamientos').change(function () {
     document.getElementById("CantonAsentamientos").innerHTML = "";
     $.ajax({
         type: "POST",
-        url: "Distritos/getCantones?provinciaID=" + provinciaID,
+        url: "Asentamientos/getCantones?provinciaID=" + provinciaID,
         data: {},
         success: (response) => {
             //console.log(response);
@@ -77,7 +105,7 @@ $('#CantonAsentamientos').change(function () {
     document.getElementById("DistritoAsentamientos").innerHTML = "";
     $.ajax({
         type: "POST",
-        url: "Distritos/getDistritos?cantonID=" + cantonID,
+        url: "Asentamientos/getDistritos?cantonID=" + cantonID,
         data: {},
         success: (response) => {
             //console.log(response);

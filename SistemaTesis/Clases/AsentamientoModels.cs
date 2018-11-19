@@ -22,6 +22,11 @@ namespace SistemaTesis.Clases
             return context.Provincia.Where(p => p.Estado == true).ToList();
         }
 
+        internal List<TipoDocumento> getTiposDocumentos()
+        {
+            return context.TipoDocumento.Where(t => t.Estado == true).ToList();
+        }
+
         internal List<Canton> getCantones(int provinciaID)
         {
             return context.Canton.Where(c => c.Estado == true && c.ProvinciaID == provinciaID).ToList();
@@ -35,6 +40,11 @@ namespace SistemaTesis.Clases
         public List<Provincia> getProvincia(int id)
         {
             return context.Provincia.Where(p => p.ProvinciaID == id).ToList();
+        }
+
+        public List<TipoDocumento> getTipoDocumento(int id)
+        {
+            return context.TipoDocumento.Where(t => t.TipoDocumentoID == id).ToList();
         }
 
         public List<Canton> getCanton(int id)

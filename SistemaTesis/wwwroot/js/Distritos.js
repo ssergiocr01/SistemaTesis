@@ -110,7 +110,7 @@ class Distritos {
                         document.getElementById("titleDistrito").innerHTML = "Esta seguro de habilitar el distrito " + response[0].nombre;
                     }
                     promesa = Promise.resolve({
-                        id: response[0].provinciaID,
+                        id: response[0].distritoID,
                         nombre: response[0].nombre,
                         estado: response[0].estado,
                         provincia: response[0].provinciaID,

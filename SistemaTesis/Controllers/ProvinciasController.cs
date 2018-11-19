@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace SistemaTesis.Controllers
 {
+    [Authorize(Roles ="Administrador")]
     public class ProvinciasController : Controller
     {
         private readonly ApplicationDbContext _context;

@@ -102,7 +102,7 @@ class Cantones {
                         document.getElementById("titleCanton").innerHTML = "Esta seguro de habilitar el canton " + response[0].nombre;
                     }
                     promesa = Promise.resolve({
-                        id: response[0].provinciaID,
+                        id: response[0].cantonID,
                         nombre: response[0].nombre,                        
                         estado: response[0].estado,
                         provincia: response[0].provinciaID

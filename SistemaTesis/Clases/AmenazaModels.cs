@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using SistemaTesis.Data;
 using SistemaTesis.Models;
 using System;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace SistemaTesis.Clases
 {
+    [Authorize(Roles = "Administrador")]
     public class AmenazaModels
     {
         private ApplicationDbContext context;

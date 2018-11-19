@@ -8,7 +8,7 @@ using SistemaTesis.Models;
 
 namespace SistemaTesis.Controllers
 {
-    [Authorize(Roles = "Administrador")]
+    //[Authorize(Roles = "Administrador")]
     public class AsentamientosController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -29,6 +29,11 @@ namespace SistemaTesis.Controllers
         public List<Provincia> getProvincias()
         {
             return asentamientoModels.getProvincias();
+        }
+
+        public List<TipoDocumento> getTiposDocumentos()
+        {
+            return asentamientoModels.getTiposDocumentos();
         }
 
         public List<Canton> getCantones(int provinciaID)

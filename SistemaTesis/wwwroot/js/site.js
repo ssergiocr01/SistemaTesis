@@ -28,6 +28,10 @@ $('#modalAmenazas').on('shown.bs.modal', function () {
     $('#Descripcion').focus();
 });
 
+$('#modalCatalogo').on('shown.bs.modal', function () {
+    $('#Descripcion').focus();
+});
+
 $().ready(() => {
     var URLactual = window.location;
     document.getElementById("filtrar").focus();
@@ -35,6 +39,7 @@ $().ready(() => {
     switch (URLactual.pathname) {
         case "/Asentamientos":
             getAsentamientoProvincias(0, 0);
+            getAsentamientoTiposDocumentos(0, 0);
             //filtrarAsentamientos(1, "nombre");
             break;
         case "/Amenazas":
@@ -49,6 +54,10 @@ $().ready(() => {
         case "/Cantones":
             getProvincias(0, 0);
             filtrarCanton(1, "nombre");
+            break;
+        case "/CatalogosAmenazas":
+            getAmenazas(0, 0);
+            filtrarCatalogo(1, "descripcion");
             break;
         case "/Distritos":
             getDistritoProvincias(0, 0);
@@ -316,7 +325,7 @@ var editarEstadoAmenaza = (id, fun) => {
     funcion = fun;
     var action = 'Amenazas/getAmenazas';
     var amenaza = new Amenazas("", "", "", action);
-    provincia.qetProvincia(id, funcion);
+    amenaza.qetAmenaza(id, funcion);
 }
 
 var editarAmenaza = () => {
@@ -421,6 +430,62 @@ var restablecerCantones = () => {
 }
 
 /*
+ * Mantenimiento Módulo Catalogo Amenazas
+ */
+
+var idCatalogo;
+
+var getAmenazas = (id, fun) => {
+    var action = 'CatalogosAmenazas/getAmenazas';
+    var catalogos = new CatalogosAmenazas("", "", "", "", action);
+    catalogos.getAmenazas(id, fun);
+}
+
+var agregarCatalogo = () => {
+    if (funcion == 0) {
+        var action = 'CatalogosAmenazas/agregarCatalogo';
+    } else {
+        var action = "CatalogosAmenazas/editarCatalogo";
+    }
+    var descripcion = document.getElementById("Descripcion").value;
+    var estado = document.getElementById("Estado").checked
+    var amenazas = document.getElementById('AmenazaCatalogo');
+    var amenaza = amenazas.options[amenazas.selectedIndex].value;
+    var porcentaje = document.getElementById("Porcentaje").value;
+    var catalogos = new CatalogosAmenazas(descripcion, estado, amenaza, porcentaje, action);
+    catalogos.agregarCatalogo(idCatalogo, funcion);
+    funcion = 0;
+}
+
+var filtrarCatalogo = (numPagina, order) => {
+    var action = 'CatalogosAmenazas/filtrarCatalogo';
+    var valor = document.getElementById("filtrar").value;
+    var catalogos = new CatalogosAmenazas(valor, "", "", "", action);
+    if (funcion == 0) {
+        catalogos.filtrarCatalogo(numPagina, order);
+    }
+}
+
+var editarEstadoCatalogo = (id, fun) => {
+    funcion = fun;
+    idCatalogo = id;
+    var action = 'CatalogosAmenazas/getCatalogos';
+    var catalogos = new CatalogosAmenazas("", "", "", "", action);
+    catalogos.getCatalogos(id, fun);
+}
+
+var editarEstadoCatalogo1 = () => {
+    var action = 'CatalogosAmenazas/editarCatalogo';
+    var catalogos = new CatalogosAmenazas("", "", "", "", action);
+    catalogos.editarEstadoCatalogo(idCatalogo, funcion);
+}
+
+var restablecerCatalogos = () => {
+    var catalogos = new CatalogosAmenazas("", "", "", "", "");
+    catalogos.restablecer();
+}
+
+/*
  * Mantenimiento Módulo Distritos
  */
 
@@ -487,6 +552,12 @@ var getAsentamientoProvincias = (id, fun) => {
     var action = 'Asentamientos/getProvincias';
     var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", action);
     asentamientos.getAsentamientoProvincias(id, fun);
+}
+
+var getAsentamientoTiposDocumentos = (id, fun) => {
+    var action = 'Asentamientos/getTiposDocumentos';
+    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", action);
+    asentamientos.getAsentamientoTiposDocumentos(id, fun);
 }
 
 var agregarAsentamiento = () => {
