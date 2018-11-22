@@ -33,7 +33,7 @@ namespace SistemaTesis.Models
 
         [Display(Name = "Número de Documento")]
         [Required(ErrorMessage = "El campo {0} es requerido")]
-        public int NumDocumento { get; set; }
+        public string NumDocumento { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es requerido")]
         public DateTime Ocupacion { get; set; }

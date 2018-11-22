@@ -5,14 +5,15 @@
 
 class Asentamientos {
 
-    constructor(nombre, provincia, canton, distrito, direccion, coordenadas, propietario, tipoDocumento, numDocumento, ocupacion, numViviendas, estado, action) {
+    constructor(nombre, provincia, canton, distrito, direccion, coordenadas, nombrePropietario, apellidosPropietario, tipoDocumento, numDocumento, ocupacion, numViviendas, estado, action) {
         this.nombre = nombre;
         this.provincia = provincia;
         this.canton = canton;
         this.distrito = distrito;
         this.direccion = direccion;
         this.coordenadas = coordenadas;
-        this.propietario = propietario;
+        this.nombrePropietario = nombrePropietario;
+        this.apellidosPropietario = apellidosPropietario;
         this.tipoDocumento = tipoDocumento;
         this.numDocumento = numDocumento;
         this.ocupacion = ocupacion;
@@ -31,6 +32,7 @@ class Asentamientos {
             success: (response) => {
                 //console.log(response);
                 document.getElementById('ProvinciaAsentamientos').options[0] = new Option("[Seleccione una provincia]", 0);
+                
                 if (0 < response.length) {
                     for (var i = 0; i < response.length; i++) {
                         if (0 == funcion) {
@@ -47,7 +49,7 @@ class Asentamientos {
                 }
             }
         });
-    } 
+    }
 
     getAsentamientoTiposDocumentos(id, funcion) {
         var action = this.action;
@@ -75,7 +77,210 @@ class Asentamientos {
                 }
             }
         });
-    } 
+    }
+
+    agregarAsentamiento(id, funcion) {
+        if (this.nombre == "") {
+            document.getElementById("mensaje").innerHTML = "Seleccione un nombre";
+            document.getElementById("Nombre").focus();
+        } else {
+            if (this.provincia == "0") {
+                document.getElementById("mensaje").innerHTML = "Seleccione una provincia";
+            } else {
+                if (this.canton == "0") {
+                    document.getElementById("mensaje").innerHTML = "Seleccione un cantón";
+                } else {
+                    if (this.distrito == "0") {
+                        document.getElementById("mensaje").innerHTML = "Seleccione un distrito";
+                    } else {
+                        if (this.direccion == "") {
+                            document.getElementById("Direccion").focus();
+                        } else {
+                            if (this.nombrePropietario == "") {
+                                document.getElementById("nombrePropietario").focus();
+                            } else {
+                                if (this.apellidosPropietario == "") {
+                                    document.getElementById("nombrePropietario").focus();
+                                } else {
+                                    if (this.tipoDocumento == "0") {
+                                        document.getElementById("mensaje").innerHTML = "Seleccione un tipo de documento";
+                                    } else {
+                                        if (this.numDocumento == "") {
+                                            document.getElementById("numDocumento").focus();
+                                        } else {
+                                            if (this.ocupacion == "") {
+                                                document.getElementById("mensaje").innerHTML = "Seleccione una fecha de ocupación";
+                                            } else {
+                                                if (this.numViviendas == "") {
+                                                    document.getElementById("numDocumento").focus();
+                                                } else {
+                                                    var nombre = this.nombre;
+                                                    var provincia = this.provincia;
+                                                    var canton = this.canton;
+                                                    var distrito = this.distrito;
+                                                    var direccion = this.direccion;
+                                                    var coordenadas = this.coordenadas;
+                                                    var nombrePropietario = this.nombrePropietario;
+                                                    var apellidosPropietario = this.apellidosPropietario;
+                                                    var tipoDocumento = this.tipoDocumento;
+                                                    var numDocumento = this.numDocumento;
+                                                    var ocupacion = this.ocupacion;
+                                                    var numViviendas = this.numViviendas;
+                                                    var estado = this.estado;
+                                                    var action = this.action;
+                                                    $.ajax({
+                                                        type: "POST",
+                                                        url: action,
+                                                        data: {
+                                                            id, nombre, provincia, canton, distrito, direccion, coordenadas, nombrePropietario, apellidosPropietario,
+                                                            tipoDocumento, numDocumento, ocupacion, numViviendas, estado, funcion
+                                                        },
+                                                        success: (response) => {
+                                                            if ("Save" == response[0].code) {
+                                                                this.restablecer();
+                                                            } else {
+                                                                document.getElementById("mensaje").innerHTML = "No se puede guardar el asentamiento";
+                                                            }
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    filtrarAsentamiento(numPagina, order) {
+        var valor = this.nombre;
+        var action = this.action;
+        var funcion = 1;
+        if (valor == "") {
+            valor = "null";
+        }
+        $.ajax({
+            type: "POST",
+            url: action,
+            data: { valor, numPagina, order, funcion },
+            success: (response) => {
+                $("#resultSearch").html(response[0][0]);
+                $("#paginado").html(response[0][1]);
+            }
+        });
+    }
+
+    getAsentamientos(id, funcion) {
+        var action = this.action;
+        $.ajax({
+            type: "POST",
+            url: action,
+            data: { id },
+            success: (response) => {
+                console.log(response);
+                if (funcion == 0) {
+                    if (response[0].estado) {
+                        document.getElementById("titleAsentamiento").innerHTML = "Esta seguro de desactivar el asentamiento " + response[0].nombre;
+                    } else {
+                        document.getElementById("titleAsentamiento").innerHTML = "Esta seguro de habilitar el asentamiento " + response[0].nombre;
+                    }
+                    promesa = Promise.resolve({
+                        id: response[0].distritoID,
+                        nombre: response[0].nombre,
+                        provincia: response[0].provinciaID,
+                        canton: response[0].cantonID,
+                        distrito: response[0].distritoID,
+                        direccion: response[0].direccion,
+                        coordenadas: response[0].coordenadas,
+                        nombrePropietario: response[0].nombrePropietario,
+                        apellidosPropietario: response[0].apellidosPropietario,
+                        tipoDocumento: response[0].tipoDocumento,
+                        numDocumento: response[0].numDocumento,
+                        ocupacion: response[0].ocupacion,
+                        numViviendas: response[0].numViviendas,
+                        estado: response[0].estado,                        
+                    });
+                } else {
+                    document.getElementById("Nombre").value = response[0].nombre;
+                    getAsentamientoProvincias(response[0].provinciaID, 1);
+                    getAsentamientoTiposDocumentos(response[0].tipoDocumentoID, 1);
+                    document.getElementById("Direccion").value = response[0].direccion;
+                    document.getElementById("Coordenadas").value = response[0].coordenadas;
+                    document.getElementById("NombrePropietario").value = response[0].nombrePropietario;
+                    document.getElementById("ApellidosPropietario").value = response[0].apellidosPropietario;
+                    document.getElementById("NumDocumento").value = response[0].numDocumento;
+                    document.getElementById("Ocupacion").value = response[0].ocupacion;
+                    document.getElementById("NumViviendas").value = response[0].numViviendas;
+                    if (response[0].estado) {
+                        document.getElementById("Estado").checked = true;
+                    } else {
+                        document.getElementById("Estado").checked = false;
+                    }
+                }
+                //if (funcion == 2 || funcion == 3) {
+                //    document.getElementById("cursoTitle").innerHTML = response[0].nombre;
+                //}
+            }
+        });
+    }
+
+    editarEstadoAsentamiento(id, funcion) {
+        var nombre, provincia, canton, distrito, direccion, coordenadas, nombrePropietario, apellidosPropietario, tipoDocumento, numDocumento, ocupacion, numViviendas, estado;
+        var action = this.action;
+        promesa.then(data => {
+            // id = data.id;
+            nombre = data.nombre
+            estado = data.estado;
+            estado = data.estado;
+            provincia = data.provincia;
+            canton = data.canton;
+            distrito = data.distrito;
+            direccion = data.direccion;
+            coordenadas = data.coordenadas;
+            nombrePropietario = data.nombrePropietario;
+            apellidosPropietario = data.apellidosPropietario;
+            tipoDocumento = data.tipoDocumento;
+            numDocumento = data.numDocumento;
+            ocupacion = data.ocupacion;
+            numViviendas = data.numViviendas;
+            $.ajax({
+                type: "POST",
+                url: action,
+                data: { id, nombre, provincia, canton, distrito, direccion, coordenadas, nombrePropietario, apellidosPropietario, tipoDocumento, numDocumento, ocupacion, numViviendas, estado, funcion },
+                success: (response) => {
+                    if (response[0].code == "Save") {
+                        this.restablecer();
+                    } else {
+                        document.getElementById("titleAsentamiento").innerHTML = response[0].description;
+                    }
+                }
+            });
+        });
+    }
+
+    restablecer() {
+        document.getElementById("Nombre").value = "";        
+        document.getElementById('ProvinciaAsentamientos').selectedIndex = 0;
+        document.getElementById('CantonAsentamientos').selectedIndex = 0;
+        document.getElementById('DistritoAsentamientos').selectedIndex = 0;
+        document.getElementById("Direccion").value = "";
+        document.getElementById("Coordenadas").value = "";
+        document.getElementById("NombrePropietario").value = "";
+        document.getElementById("ApellidosPropietario").value = "";
+        document.getElementById('TipoDocumentoAsentamientos').selectedIndex = 0;
+        document.getElementById("NumDocumento").value = "";
+        document.getElementById("Ocupacion").value = "";
+        document.getElementById("NumViviendas").value = "";
+        document.getElementById("Estado").checked = false;
+        document.getElementById("mensaje").innerHTML = "";
+        filtrarAsentamientos(1, "nombre");
+        $('#modalAsentamientos').modal('hide');
+        $('#ModalEstadoAsentamiento').modal('hide');
+    }
 }
 
 $('#ProvinciaAsentamientos').change(function () {

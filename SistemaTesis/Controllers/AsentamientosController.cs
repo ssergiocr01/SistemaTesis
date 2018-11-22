@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SistemaTesis.Clases;
 using SistemaTesis.Data;
@@ -22,7 +24,7 @@ namespace SistemaTesis.Controllers
 
         // GET: Asentamientos
         public async Task<IActionResult> Index()
-        {            
+        {
             return View();
         }
 
@@ -46,6 +48,30 @@ namespace SistemaTesis.Controllers
             return asentamientoModels.getDistritos(cantonID);
         }
 
+        public List<IdentityError> agregarAsentamiento(int id, string nombre, int provincia, int canton, int distrito, string direccion, string coordenadas,
+            string nombrePropietario, string apellidosPropietario, int tipoDocumento, string numDocumento, string ocupacion, int numViviendas,
+            Boolean estado, string funcion)
+        {
+            return asentamientoModels.agregarAsentamiento(id, nombre, provincia, canton, distrito, direccion, coordenadas, nombrePropietario,
+                apellidosPropietario, tipoDocumento, numDocumento, ocupacion, numViviendas, estado, funcion);
+        }
 
+        public List<object[]> filtrarAsentamiento(int numPagina, string valor, string order, int funcion)
+        {
+            return asentamientoModels.filtrarAsentamiento(numPagina, valor, order, funcion);
+        }
+
+        public List<Asentamiento> getAsentamientos(int cantonID)
+        {
+            return asentamientoModels.getAsentamientos(cantonID);
+        }
+
+        public List<IdentityError> editarAsentamiento(int id, string nombre, int provincia, int canton, int distrito, string direccion, string coordenadas,
+            string nombrePropietario, string apellidosPropietario, int tipoDocumento, string numDocumento, string ocupacion, int numViviendas,
+            Boolean estado, int funcion)
+        {
+            return asentamientoModels.editarAsentamiento(id, nombre, provincia, canton, distrito, direccion, coordenadas, nombrePropietario, apellidosPropietario,
+                tipoDocumento, numDocumento, ocupacion, numViviendas, estado, funcion);
+        }
     }
 }

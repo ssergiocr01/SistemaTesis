@@ -4,6 +4,8 @@
 
 <h2>@ViewData["Title"]</h2>
 
+
+
 <p>
     <a data-toggle="modal" data-target="#modalAsentamientos" class="btn btn-primary">Crear Asentamiento</a>
 </p>
@@ -36,10 +38,13 @@
                 Coordenadas
             </th>
             <th>
-                Propietario
+                Nombre Propietario
             </th>
             <th>
-                <a href="#" onclick='filtrarAsentamiento(1, "tipoDocumento");'>Tipo de Documento</a>
+                Apellidos Propietario
+            </th>
+            <th>
+                Tipo de Documento
             </th>
             <th>
                 N&uacute;mero de Documento
@@ -65,7 +70,7 @@
 
 </div>
 
-<!--Modal Agregar Distrito-->
+<!--Modal Agregar Tipo Documento-->
 <div class="modal fade" id="modalAsentamientos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -79,7 +84,7 @@
                         <div class="form-group">
                             <label for="Nombre" class="col-md-2 control-label">Nombre</label>
                             <div class="col-md-10">
-                                <input form="Nombre" id="Nombre" placeholder="Nombre" name="Nombre" class="form-control" />
+                                <input type="text" form="Nombre" id="Nombre" placeholder="Nombre" name="Nombre" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -118,25 +123,25 @@
                         <div class="form-group">
                             <label for="Coordenadas" class="col-md-2 control-label">Coordenadas</label>
                             <div class="col-md-10">
-                                <input form="Coordenadas" id="Coordenadas" placeholder="Coordenadas" name="Coordenadas" class="form-control" />
+                                <input type="text" form="Coordenadas" id="Coordenadas" placeholder="Coordenadas" name="Coordenadas" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="NombrePropietario" class="col-md-2 control-label">Nombre del Propietario</label>
                             <div class="col-md-10">
-                                <input form="NombrePropietario" id="NombrePropietario" placeholder="NombrePropietario" name="NombrePropietario" class="form-control" />
+                                <input type="text" form="NombrePropietario" id="NombrePropietario" placeholder="NombrePropietario" name="NombrePropietario" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="ApellidosPropietario" class="col-md-2 control-label">Apellidos del Propietario</label>
                             <div class="col-md-10">
-                                <input form="ApellidosPropietario" id="ApellidosPropietario" placeholder="ApellidosPropietario" name="ApellidosPropietario" class="form-control" />
+                                <input type="text" form="ApellidosPropietario" id="ApellidosPropietario" placeholder="ApellidosPropietario" name="ApellidosPropietario" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="TipoDocumento" class="col-md-2 control-label">Tipo de Documento</label>
                             <div class="col-md-10">
-                                <select id="DistritoTipoDocumento" class="form-control">
+                                <select id="TipoDocumentoAsentamientos" class="form-control">
                                     <option value='0'>[Seleccione un tipo de documento...]</option>
 
                                 </select>
@@ -145,7 +150,19 @@
                         <div class="form-group">
                             <label for="NumDocumento" class="col-md-2 control-label">N&uacute;mero de documento</label>
                             <div class="col-md-10">
-                                <input form="NumDocumento" id="NumDocumento" placeholder="NumDocumento" name="NumDocumento" class="form-control" />
+                                <input type="text" form="NumDocumento" id="NumDocumento" placeholder="Número de Documento" name="NumDocumento" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Ocupacion" class="col-md-2 control-label">Fecha de Ocupación</label>
+                            <div class="col-md-10">
+                                <input type="text" form="Ocupacion" id="Ocupacion" name="Ocupacion" placeholder="Fecha de Ocupación" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="NumViviendas" class="col-md-2 control-label">Fecha de Ocupación</label>
+                            <div class="col-md-10">
+                                <input type="text" form="NumViviendas" id="NumViviendas" name="NumViviendas" placeholder="Número de Viviendas"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -161,7 +178,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                <button type="button" onclick="agregarDistrito()" class="btn btn-primary">Guardar</button>
+                <button type="button" onclick="agregarAsentamiento()" class="btn btn-primary">Guardar</button>
             </div>
         </div>
     </div>
@@ -175,7 +192,7 @@
                 <h4 class="modal-title">Actualizar estado</h4>
             </div>
             <div class="modal-body">
-                <h3 id="titleDistrito" class="modal-title"></h3>
+                <h3 id="titleAsentamiento" class="modal-title"></h3>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -184,3 +201,15 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+@section scripts{ 
+    <script>
+        $(function () {
+            $("#Ocupacion").datepicker({
+                showButtonPanel: true,
+                showOtherMonths: true,
+                selectOtherMonths: true
+            });
+        });
+    </script>
+}

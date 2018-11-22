@@ -40,7 +40,7 @@ $().ready(() => {
         case "/Asentamientos":
             getAsentamientoProvincias(0, 0);
             getAsentamientoTiposDocumentos(0, 0);
-            //filtrarAsentamientos(1, "nombre");
+            filtrarAsentamiento(1, "nombre");
             break;
         case "/Amenazas":
             filtrarAmenazas(1, "descripcion");
@@ -550,13 +550,13 @@ var idAsentamiento;
 
 var getAsentamientoProvincias = (id, fun) => {
     var action = 'Asentamientos/getProvincias';
-    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", action);
+    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", "", action);
     asentamientos.getAsentamientoProvincias(id, fun);
 }
 
 var getAsentamientoTiposDocumentos = (id, fun) => {
     var action = 'Asentamientos/getTiposDocumentos';
-    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", action);
+    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", "", action);
     asentamientos.getAsentamientoTiposDocumentos(id, fun);
 }
 
@@ -567,9 +567,9 @@ var agregarAsentamiento = () => {
         var action = 'Asentamientos/editarAsentamiento';
     }
     var nombre = document.getElementById("Nombre").value;
-    var provincias = document.getElementById('ProvinciaDistritos');
+    var provincias = document.getElementById('ProvinciaAsentamientos');
     var provincia = provincias.options[provincias.selectedIndex].value;
-    var cantones = document.getElementById('CantonDistritos');
+    var cantones = document.getElementById('CantonAsentamientos');
     var canton = cantones.options[cantones.selectedIndex].value;
     var distritos = document.getElementById('DistritoAsentamientos');
     var distrito = distritos.options[distritos.selectedIndex].value;
@@ -577,11 +577,13 @@ var agregarAsentamiento = () => {
     var coordenadas = document.getElementById("Coordenadas").value;
     var nombrePropietario = document.getElementById("NombrePropietario").value;
     var apellidosPropietario = document.getElementById("ApellidosPropietario").value;
-    var tiposDocumentos = document.getElementById('DistritoTipoDocumento');
+    var tiposDocumentos = document.getElementById('TipoDocumentoAsentamientos');
     var tipoDocumento = tiposDocumentos.options[tiposDocumentos.selectedIndex].value;
-    var numDocumento = document.getElementById("NumDocumento");
+    var numDocumento = document.getElementById("NumDocumento").value;
+    var ocupacion = document.getElementById("Ocupacion").value;
+    var numViviendas = document.getElementById("NumViviendas").value;
     var estado = document.getElementById("Estado").checked
-    var asentamientos = new Asentamientos(nombre, estado, provincia, canton, distrito, direccion, coordenadas, nombrePropietario, apellidosPropietario, tipoDocumento, action);
+    var asentamientos = new Asentamientos(nombre, provincia, canton, distrito, direccion, coordenadas, nombrePropietario, apellidosPropietario, tipoDocumento, numDocumento, ocupacion, numViviendas, estado, action);
     asentamientos.agregarAsentamiento(idAsentamiento, funcion);
     funcion = 0;
 }
@@ -589,7 +591,7 @@ var agregarAsentamiento = () => {
 var filtrarAsentamiento = (numPagina, order) => {
     var action = 'Asentamientos/filtrarAsentamiento';
     var valor = document.getElementById("filtrar").value;
-    var asentamientos = new Asentamientos(valor, "", "", "", "", "", "", "", "", "", "", "", action);
+    var asentamientos = new Asentamientos(valor, "", "", "", "", "", "", "", "", "", "", "", "", action);
     if (funcion == 0) {
         asentamientos.filtrarAsentamiento(numPagina, order);
     }
@@ -599,18 +601,18 @@ var editarEstadoAsentamiento = (id, fun) => {
     funcion = fun;
     idAsentamiento = id;
     var action = 'Asentamientos/getAsentamientos';
-    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", action);
+    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", "", action);
     asentamientos.getAsentamientos(id, fun);
 }
 
 var editarEstadoAsentamiento1 = () => {
     var action = 'Asentamientos/editarAsentamiento';
-    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", action);
+    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", "", action);
     asentamientos.editarEstadoAsentamiento(idAsentamiento, funcion);
 }
 
 var restablecerAsentamientos = () => {
-    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "");
+    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", "");
     asentamientos.restablecer();
 }
 

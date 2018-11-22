@@ -51,9 +51,9 @@ namespace SistemaTesis.Controllers
             return distritoModels.filtrarDistrito(numPagina, valor, order, funcion);
         }
 
-        public List<Distrito> getDistritos(int cantonID)
+        public List<Distrito> getDistritos(int id)
         {
-            return distritoModels.getDistritos(cantonID);
+            return distritoModels.getDistritos(id);
         }
 
         public List<IdentityError> editarDistrito(int id, string nombre, Boolean estado, int provincia, int canton, int funcion)

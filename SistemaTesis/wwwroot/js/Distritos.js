@@ -41,7 +41,6 @@ class Distritos {
         });
     }  
 
-
     agregarDistrito(id, funcion) {
         if (this.nombre == "") {
             document.getElementById("Nombre").focus();
@@ -118,7 +117,7 @@ class Distritos {
                     });
                 } else {
                     document.getElementById("Nombre").value = response[0].nombre;
-                    getProvincias(response[0].provinciaID, 1);
+                    getDistritoProvincias(response[0].provinciaID, 1);
                     if (response[0].estado) {
                         document.getElementById("Estado").checked = true;
                     } else {
