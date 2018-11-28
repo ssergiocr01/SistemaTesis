@@ -11,9 +11,10 @@ using System;
 namespace SistemaTesis.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181123224925_[Formulario-2]")]
+    partial class Formulario2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -206,16 +207,14 @@ namespace SistemaTesis.Data.Migrations
 
                     b.Property<int>("CantonID");
 
+                    b.Property<string>("Coordenadas");
+
                     b.Property<string>("Direccion")
                         .IsRequired();
 
                     b.Property<int>("DistritoID");
 
                     b.Property<bool>("Estado");
-
-                    b.Property<string>("Latitud");
-
-                    b.Property<string>("Longitud");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -321,16 +320,13 @@ namespace SistemaTesis.Data.Migrations
                     b.Property<int>("Abandono")
                         .HasMaxLength(100);
 
-                    b.Property<string>("AccesoAgua")
-                        .IsRequired()
+                    b.Property<int>("AccesoAgua")
                         .HasMaxLength(100);
 
-                    b.Property<string>("AccesoElectricidad")
-                        .IsRequired()
+                    b.Property<int>("AccesoElectricidad")
                         .HasMaxLength(100);
 
-                    b.Property<string>("AguasResiduales")
-                        .IsRequired()
+                    b.Property<int>("AguasResiduales")
                         .HasMaxLength(100);
 
                     b.Property<int>("Alcoholismo")
@@ -371,8 +367,6 @@ namespace SistemaTesis.Data.Migrations
                     b.Property<int>("EmpleoInformal")
                         .HasMaxLength(100);
 
-                    b.Property<bool>("Estado");
-
                     b.Property<string>("FamiliaIndicadores")
                         .IsRequired()
                         .HasMaxLength(100);
@@ -410,8 +404,7 @@ namespace SistemaTesis.Data.Migrations
                     b.Property<string>("Observaciones")
                         .HasMaxLength(2000);
 
-                    b.Property<string>("RecoleccionBasura")
-                        .IsRequired()
+                    b.Property<int>("RecoleccionBasura")
                         .HasMaxLength(100);
 
                     b.Property<string>("RecreativoIndicadores")
@@ -431,8 +424,6 @@ namespace SistemaTesis.Data.Migrations
                     b.Property<string>("TenenciaIndicadores")
                         .IsRequired()
                         .HasMaxLength(100);
-
-                    b.Property<double>("ValorFinal");
 
                     b.Property<int>("ViolenciaIntrafamiliar")
                         .HasMaxLength(100);
@@ -487,7 +478,11 @@ namespace SistemaTesis.Data.Migrations
 
                     b.Property<bool>("Estado");
 
+                    b.Property<int?>("TipoDocumentoID1");
+
                     b.HasKey("TipoDocumentoID");
+
+                    b.HasIndex("TipoDocumentoID1");
 
                     b.ToTable("TipoDocumento");
                 });
@@ -555,7 +550,7 @@ namespace SistemaTesis.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SistemaTesis.Models.TipoDocumento", "TipoDocumento")
-                        .WithMany("Asentamientos")
+                        .WithMany()
                         .HasForeignKey("TipoDocumentoID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -608,6 +603,13 @@ namespace SistemaTesis.Data.Migrations
                         .WithMany("FormulariosAmenazas")
                         .HasForeignKey("FormularioID")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SistemaTesis.Models.TipoDocumento", b =>
+                {
+                    b.HasOne("SistemaTesis.Models.TipoDocumento")
+                        .WithMany("TiposDocumentos")
+                        .HasForeignKey("TipoDocumentoID1");
                 });
 #pragma warning restore 612, 618
         }

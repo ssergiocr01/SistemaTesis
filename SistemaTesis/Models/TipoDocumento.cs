@@ -13,6 +13,6 @@ namespace SistemaTesis.Models
 
         public Boolean Estado { get; set; }
 
-        public ICollection<TipoDocumento> TiposDocumentos { get; set; }
+        public ICollection<Asentamiento> Asentamientos { get; set; }
     }
 }

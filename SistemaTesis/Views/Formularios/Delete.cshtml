@@ -1,0 +1,231 @@
+﻿@model SistemaTesis.Models.Formulario
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Formulario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaLlenado)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FechaLlenado)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TenenciaIndicadores)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TenenciaIndicadores)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FamiliaIndicadores)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FamiliaIndicadores)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EducacionPrimariaIndicadores)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EducacionPrimariaIndicadores)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EducacionSecundariaIndicadores)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EducacionSecundariaIndicadores)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SaludIndicadores)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SaludIndicadores)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CuidoIndicadores)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CuidoIndicadores)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IMASIndicadores)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IMASIndicadores)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RecreativoIndicadores)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RecreativoIndicadores)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ConPersoneria)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ConPersoneria)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SinPersoneria)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SinPersoneria)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AccesoAgua)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AccesoAgua)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AccesoElectricidad)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AccesoElectricidad)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AguasResiduales)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AguasResiduales)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RecoleccionBasura)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RecoleccionBasura)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hurtos)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hurtos)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ViolenciaIntrafamiliar)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ViolenciaIntrafamiliar)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Abandono)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Abandono)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Alcoholismo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Alcoholismo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Empleo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Empleo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EdadProductiva)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EdadProductiva)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpleoInformal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmpleoInformal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpleoInfantil)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmpleoInfantil)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.JefesHogar)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.JefesHogar)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmbarazosAdolescentes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmbarazosAdolescentes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MiembrosCostarricenses)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MiembrosCostarricenses)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MiembroExtranjero)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MiembroExtranjero)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ResidenciaPermanente)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ResidenciaPermanente)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CondicionIrregular)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CondicionIrregular)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreEvaluador)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NombreEvaluador)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Institucion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Institucion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NumCedula)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NumCedula)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Observaciones)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorFinal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ValorFinal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Asentamiento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Asentamiento.ApellidosPropietario)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="FormularioID" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

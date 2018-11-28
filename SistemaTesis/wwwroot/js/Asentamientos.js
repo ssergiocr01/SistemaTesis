@@ -5,13 +5,14 @@
 
 class Asentamientos {
 
-    constructor(nombre, provincia, canton, distrito, direccion, coordenadas, nombrePropietario, apellidosPropietario, tipoDocumento, numDocumento, ocupacion, numViviendas, estado, action) {
+    constructor(nombre, provincia, canton, distrito, direccion, longitud, latitud, nombrePropietario, apellidosPropietario, tipoDocumento, numDocumento, ocupacion, numViviendas, estado, action) {
         this.nombre = nombre;
         this.provincia = provincia;
         this.canton = canton;
         this.distrito = distrito;
         this.direccion = direccion;
-        this.coordenadas = coordenadas;
+        this.longitud = longitud;
+        this.latitud = latitud;
         this.nombrePropietario = nombrePropietario;
         this.apellidosPropietario = apellidosPropietario;
         this.tipoDocumento = tipoDocumento;
@@ -119,7 +120,8 @@ class Asentamientos {
                                                     var canton = this.canton;
                                                     var distrito = this.distrito;
                                                     var direccion = this.direccion;
-                                                    var coordenadas = this.coordenadas;
+                                                    var longitud = this.longitud;
+                                                    var latitud = this.latitud;
                                                     var nombrePropietario = this.nombrePropietario;
                                                     var apellidosPropietario = this.apellidosPropietario;
                                                     var tipoDocumento = this.tipoDocumento;
@@ -132,7 +134,7 @@ class Asentamientos {
                                                         type: "POST",
                                                         url: action,
                                                         data: {
-                                                            id, nombre, provincia, canton, distrito, direccion, coordenadas, nombrePropietario, apellidosPropietario,
+                                                            id, nombre, provincia, canton, distrito, direccion, longitud, latitud, nombrePropietario, apellidosPropietario,
                                                             tipoDocumento, numDocumento, ocupacion, numViviendas, estado, funcion
                                                         },
                                                         success: (response) => {
@@ -174,12 +176,12 @@ class Asentamientos {
         });
     }
 
-    getAsentamientos(id, funcion) {
+    getAsentamientos(asentamientoID, funcion) {
         var action = this.action;
         $.ajax({
             type: "POST",
             url: action,
-            data: { id },
+            data: { asentamientoID },
             success: (response) => {
                 console.log(response);
                 if (funcion == 0) {
@@ -195,10 +197,11 @@ class Asentamientos {
                         canton: response[0].cantonID,
                         distrito: response[0].distritoID,
                         direccion: response[0].direccion,
-                        coordenadas: response[0].coordenadas,
+                        longitud: response[0].longitud,
+                        latitud: response[0].latitud,
                         nombrePropietario: response[0].nombrePropietario,
                         apellidosPropietario: response[0].apellidosPropietario,
-                        tipoDocumento: response[0].tipoDocumento,
+                        tipoDocumento: response[0].tipoDocumentoID,
                         numDocumento: response[0].numDocumento,
                         ocupacion: response[0].ocupacion,
                         numViviendas: response[0].numViviendas,
@@ -209,7 +212,8 @@ class Asentamientos {
                     getAsentamientoProvincias(response[0].provinciaID, 1);
                     getAsentamientoTiposDocumentos(response[0].tipoDocumentoID, 1);
                     document.getElementById("Direccion").value = response[0].direccion;
-                    document.getElementById("Coordenadas").value = response[0].coordenadas;
+                    document.getElementById("Longitud").value = response[0].longitud;
+                    document.getElementById("Latitud").value = response[0].latitud;
                     document.getElementById("NombrePropietario").value = response[0].nombrePropietario;
                     document.getElementById("ApellidosPropietario").value = response[0].apellidosPropietario;
                     document.getElementById("NumDocumento").value = response[0].numDocumento;
@@ -229,28 +233,36 @@ class Asentamientos {
     }
 
     editarEstadoAsentamiento(id, funcion) {
-        var nombre, provincia, canton, distrito, direccion, coordenadas, nombrePropietario, apellidosPropietario, tipoDocumento, numDocumento, ocupacion, numViviendas, estado;
+        var nombre, provincia, canton, distrito, direccion,
+            longitud, latitud, nombrePropietario, apellidosPropietario,
+            tipoDocumento, numDocumento, ocupacion, numViviendas,
+            estado;
         var action = this.action;
         promesa.then(data => {
             // id = data.id;
-            nombre = data.nombre
-            estado = data.estado;
-            estado = data.estado;
+            nombre = data.nombre;            
             provincia = data.provincia;
             canton = data.canton;
             distrito = data.distrito;
             direccion = data.direccion;
-            coordenadas = data.coordenadas;
+            longitud = data.longitud;
+            latitud = data.latitud;
             nombrePropietario = data.nombrePropietario;
             apellidosPropietario = data.apellidosPropietario;
             tipoDocumento = data.tipoDocumento;
             numDocumento = data.numDocumento;
             ocupacion = data.ocupacion;
             numViviendas = data.numViviendas;
+            estado = data.estado;
             $.ajax({
                 type: "POST",
                 url: action,
-                data: { id, nombre, provincia, canton, distrito, direccion, coordenadas, nombrePropietario, apellidosPropietario, tipoDocumento, numDocumento, ocupacion, numViviendas, estado, funcion },
+                data: {
+                    id, nombre, provincia, canton, distrito, direccion,
+                    longitud, latitud, nombrePropietario, apellidosPropietario,
+                    tipoDocumento, numDocumento, ocupacion, numViviendas,
+                    estado, funcion
+                },
                 success: (response) => {
                     if (response[0].code == "Save") {
                         this.restablecer();
@@ -268,7 +280,8 @@ class Asentamientos {
         document.getElementById('CantonAsentamientos').selectedIndex = 0;
         document.getElementById('DistritoAsentamientos').selectedIndex = 0;
         document.getElementById("Direccion").value = "";
-        document.getElementById("Coordenadas").value = "";
+        document.getElementById("Longitud").value = "";
+        document.getElementById("Latitud").value = "";
         document.getElementById("NombrePropietario").value = "";
         document.getElementById("ApellidosPropietario").value = "";
         document.getElementById('TipoDocumentoAsentamientos').selectedIndex = 0;
@@ -277,7 +290,7 @@ class Asentamientos {
         document.getElementById("NumViviendas").value = "";
         document.getElementById("Estado").checked = false;
         document.getElementById("mensaje").innerHTML = "";
-        filtrarAsentamientos(1, "nombre");
+        filtrarAsentamiento(1, "nombre");
         $('#modalAsentamientos').modal('hide');
         $('#ModalEstadoAsentamiento').modal('hide');
     }

@@ -32,6 +32,10 @@ $('#modalCatalogo').on('shown.bs.modal', function () {
     $('#Descripcion').focus();
 });
 
+$('#modalFormulario').on('shown.bs.modal', function () {
+    $('#Descripcion').focus();
+});
+
 $().ready(() => {
     var URLactual = window.location;
     document.getElementById("filtrar").focus();
@@ -550,13 +554,13 @@ var idAsentamiento;
 
 var getAsentamientoProvincias = (id, fun) => {
     var action = 'Asentamientos/getProvincias';
-    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", "", action);
+    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", "", "", action);
     asentamientos.getAsentamientoProvincias(id, fun);
 }
 
 var getAsentamientoTiposDocumentos = (id, fun) => {
     var action = 'Asentamientos/getTiposDocumentos';
-    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", "", action);
+    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", "", "", action);
     asentamientos.getAsentamientoTiposDocumentos(id, fun);
 }
 
@@ -574,7 +578,8 @@ var agregarAsentamiento = () => {
     var distritos = document.getElementById('DistritoAsentamientos');
     var distrito = distritos.options[distritos.selectedIndex].value;
     var direccion = document.getElementById("Direccion").value;
-    var coordenadas = document.getElementById("Coordenadas").value;
+    var longitud = document.getElementById("Longitud").value;
+    var latitud = document.getElementById("Latitud").value;
     var nombrePropietario = document.getElementById("NombrePropietario").value;
     var apellidosPropietario = document.getElementById("ApellidosPropietario").value;
     var tiposDocumentos = document.getElementById('TipoDocumentoAsentamientos');
@@ -583,7 +588,7 @@ var agregarAsentamiento = () => {
     var ocupacion = document.getElementById("Ocupacion").value;
     var numViviendas = document.getElementById("NumViviendas").value;
     var estado = document.getElementById("Estado").checked
-    var asentamientos = new Asentamientos(nombre, provincia, canton, distrito, direccion, coordenadas, nombrePropietario, apellidosPropietario, tipoDocumento, numDocumento, ocupacion, numViviendas, estado, action);
+    var asentamientos = new Asentamientos(nombre, provincia, canton, distrito, direccion, longitud, latitud, nombrePropietario, apellidosPropietario, tipoDocumento, numDocumento, ocupacion, numViviendas, estado, action);
     asentamientos.agregarAsentamiento(idAsentamiento, funcion);
     funcion = 0;
 }
@@ -591,7 +596,7 @@ var agregarAsentamiento = () => {
 var filtrarAsentamiento = (numPagina, order) => {
     var action = 'Asentamientos/filtrarAsentamiento';
     var valor = document.getElementById("filtrar").value;
-    var asentamientos = new Asentamientos(valor, "", "", "", "", "", "", "", "", "", "", "", "", action);
+    var asentamientos = new Asentamientos(valor, "", "", "", "", "", "", "", "", "", "", "", "", "", action);
     if (funcion == 0) {
         asentamientos.filtrarAsentamiento(numPagina, order);
     }
@@ -601,18 +606,18 @@ var editarEstadoAsentamiento = (id, fun) => {
     funcion = fun;
     idAsentamiento = id;
     var action = 'Asentamientos/getAsentamientos';
-    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", "", action);
+    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", "", "", action);
     asentamientos.getAsentamientos(id, fun);
 }
 
 var editarEstadoAsentamiento1 = () => {
     var action = 'Asentamientos/editarAsentamiento';
-    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", "", action);
+    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", "", "", action);
     asentamientos.editarEstadoAsentamiento(idAsentamiento, funcion);
 }
 
 var restablecerAsentamientos = () => {
-    var asentamientos = new Asentamientos("", "", "", "", "", "", "", "", "", "", "", "", "");
+    var asentamientos = new Asentamientos();
     asentamientos.restablecer();
 }
 

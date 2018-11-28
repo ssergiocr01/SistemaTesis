@@ -21,5 +21,7 @@ namespace SistemaTesis.Models
         public int AmenazaID { get; set; }
 
         public Amenaza Amenaza { get; set; }
+
+        public ICollection<FormularioAmenaza> FormulariosAmenazas { get; set; }
     }
 }

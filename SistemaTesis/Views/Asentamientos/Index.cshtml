@@ -33,19 +33,13 @@
             </th>
             <th>
                 Direcci&oacute;n
+            </th>            
+            <th>
+                Nombre Propietario del Terreno
             </th>
             <th>
-                Coordenadas
-            </th>
-            <th>
-                Nombre Propietario
-            </th>
-            <th>
-                Apellidos Propietario
-            </th>
-            <th>
-                Tipo de Documento
-            </th>
+                Apellidos Propietario del Terreno
+            </th>            
             <th>
                 N&uacute;mero de Documento
             </th>
@@ -88,7 +82,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <laber for="Provincia" class="col-md-2 control-label">Provincia</laber>
+                            <label for="Provincia" class="col-md-2 control-label">Provincia</label>
                             <div class="col-md-10">
                                 <select id='ProvinciaAsentamientos' class="form-control">
                                     <option value='0'>[Seleccione una provincia...]</option>
@@ -97,7 +91,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <laber for="Canton" class="col-md-2 control-label">Cantón</laber>
+                            <label for="Canton" class="col-md-2 control-label">Cantón</label>
                             <div class="col-md-10">
                                 <select id='CantonAsentamientos' class="form-control">
                                     <option value='0'>[Seleccione un cantón...]</option>
@@ -121,9 +115,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="Coordenadas" class="col-md-2 control-label">Coordenadas</label>
+                            <label for="Longitud" class="col-md-2 control-label">Longitud</label>
                             <div class="col-md-10">
-                                <input type="text" form="Coordenadas" id="Coordenadas" placeholder="Coordenadas" name="Coordenadas" class="form-control" />
+                                <input form="Longitud" id="Longitud" placeholder="Longitud" name="Longitud" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Latitud" class="col-md-2 control-label">Latitud</label>
+                            <div class="col-md-10">
+                                <input form="Latitud" id="Latitud" placeholder="Latitud" name="Latitud" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -160,9 +160,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="NumViviendas" class="col-md-2 control-label">Fecha de Ocupación</label>
+                            <label for="NumViviendas" class="col-md-2 control-label">Número de Viviendas</label>
                             <div class="col-md-10">
-                                <input type="text" form="NumViviendas" id="NumViviendas" name="NumViviendas" placeholder="Número de Viviendas"/>
+                                <input type="text" form="NumViviendas" id="NumViviendas" name="NumViviendas" placeholder="Número de Viviendas" />
                             </div>
                         </div>
                         <div class="form-group">

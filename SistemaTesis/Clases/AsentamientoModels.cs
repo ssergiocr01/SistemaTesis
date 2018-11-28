@@ -59,7 +59,7 @@ namespace SistemaTesis.Clases
         }
 
         public List<IdentityError> agregarAsentamiento(int id, string nombre, int provincia, int canton,
-            int distrito, string direccion, string coordenadas, string nombrePropietario, string apellidosPropietario,
+            int distrito, string direccion, string longitud, string latitud, string nombrePropietario, string apellidosPropietario,
             int tipoDocumento, string numDocumento, string ocupacion, int numViviendas, Boolean estado, string funcion)
         {
             var asentamiento = new Asentamiento
@@ -69,12 +69,13 @@ namespace SistemaTesis.Clases
                 CantonID = canton,
                 DistritoID = distrito,
                 Direccion = direccion,
-                Coordenadas = coordenadas,
+                Longitud = longitud,
+                Latitud = latitud,
                 NombrePropietario = nombrePropietario,
                 ApellidosPropietario = apellidosPropietario,
                 TipoDocumentoID = tipoDocumento,
                 NumDocumento = numDocumento,
-                Ocupacion = DateTime.Parse(ocupacion),
+                Ocupacion = Convert.ToDateTime(ocupacion),
                 NumViviendas = numViviendas,
                 Estado = estado
             };
@@ -169,11 +170,9 @@ namespace SistemaTesis.Clases
                         "<td>" + provincia[0].Nombre + "</td>" +
                         "<td>" + canton[0].Nombre + "</td>" +
                         "<td>" + distrito[0].Nombre + "</td>" +
-                        "<td>" + item.Direccion + "</td>" +
-                        "<td>" + item.Coordenadas + "</td>" +
+                        "<td>" + item.Direccion + "</td>" +                        
                         "<td>" + item.NombrePropietario + "</td>" +
-                        "<td>" + item.ApellidosPropietario + "</td>" +
-                        "<td>" + tipoDocumento[0].Descripcion + "</td>" +
+                        "<td>" + item.ApellidosPropietario + "</td>" +                        
                         "<td>" + item.NumDocumento + "</td>" +
                         "<td>" + item.Ocupacion + "</td>" +
                         "<td>" + item.NumViviendas + "</td>" +
@@ -228,7 +227,7 @@ namespace SistemaTesis.Clases
         }
 
         public List<IdentityError> editarAsentamiento(int id, string nombre, int provincia, int canton,
-            int distrito, string direccion, string coordenadas, string nombrePropietario, string apellidosPropietario,
+            int distrito, string direccion, string longitud, string latitud, string nombrePropietario, string apellidosPropietario,
             int tipoDocumento, string numDocumento, string ocupacion, int numViviendas, Boolean estado, int funcion)
         {
             switch (funcion)
@@ -248,22 +247,22 @@ namespace SistemaTesis.Clases
                     estados = estado;
                     break;
             }
-            var asentamiento = new Asentamiento
-            {
-                Nombre = nombre,
-                ProvinciaID = provincia,
-                CantonID = canton,
-                DistritoID = distrito,
-                Direccion = direccion,
-                Coordenadas = coordenadas,
-                NombrePropietario = nombrePropietario,
-                ApellidosPropietario = apellidosPropietario,
-                TipoDocumentoID = tipoDocumento,
-                NumDocumento = numDocumento,
-                Ocupacion = DateTime.Parse(ocupacion),
-                NumViviendas = numViviendas,
-                Estado = estado
-            };
+            var asentamiento = context.Asentamiento.Find(id);
+            asentamiento.Nombre = nombre;
+            asentamiento.ProvinciaID = provincia;
+            asentamiento.CantonID = canton;
+            asentamiento.DistritoID = distrito;
+            asentamiento.Direccion = direccion;
+            asentamiento.Longitud = longitud;
+            asentamiento.Latitud = latitud;
+            asentamiento.NombrePropietario = nombrePropietario;
+            asentamiento.ApellidosPropietario = apellidosPropietario;
+            asentamiento.TipoDocumentoID = tipoDocumento;
+            asentamiento.NumDocumento = numDocumento;
+            asentamiento.Ocupacion = Convert.ToDateTime(ocupacion);
+            asentamiento.NumViviendas = numViviendas;
+            asentamiento.Estado = estados;
+           
             try
             {
                 context.Update(asentamiento);

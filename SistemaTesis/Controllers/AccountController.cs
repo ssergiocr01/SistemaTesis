@@ -272,6 +272,14 @@ namespace SistemaTesis.Controllers
                         await _roleManager.CreateAsync(role);
                     }
 
+                    xRol = await _roleManager.RoleExistsAsync("Evaluador");
+                    if (!xRol)
+                    {
+                        var role = new IdentityRole();
+                        role.Name = "Evaluador";
+                        await _roleManager.CreateAsync(role);
+                    }
+
                     // If we got this far, something failed, redisplay form
 
 

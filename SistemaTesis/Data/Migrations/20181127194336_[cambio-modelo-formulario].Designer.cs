@@ -11,9 +11,10 @@ using System;
 namespace SistemaTesis.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181127194336_[cambio-modelo-formulario]")]
+    partial class cambiomodeloformulario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -206,16 +207,14 @@ namespace SistemaTesis.Data.Migrations
 
                     b.Property<int>("CantonID");
 
+                    b.Property<string>("Coordenadas");
+
                     b.Property<string>("Direccion")
                         .IsRequired();
 
                     b.Property<int>("DistritoID");
 
                     b.Property<bool>("Estado");
-
-                    b.Property<string>("Latitud");
-
-                    b.Property<string>("Longitud");
 
                     b.Property<string>("Nombre")
                         .IsRequired()

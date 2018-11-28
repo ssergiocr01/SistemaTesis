@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Formulario";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Llenar Formulario</a>
+</p>
+
+<div class="form-group">
+    <div class="col-md-6">
+        <input id="filtrar" name="filtrar" placeholder="Buscar" onKeyUp="filtrarFormulario(1, 'asentamiento');" class="form-control" />
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a href="#" onclick='filtrarFormulario(1, "fechaLlenado")'>Fecha del formulario</a>
+            </th>
+            <th>
+                <a href="#" onclick='filtrarFormulario(1, "asentamiento")'>Asentamiento</a>
+            </th>
+            <th>
+                <a href="#" onclick='filtrarFormulario(1,"nombreEvaluador")'>Evaluador</a>
+            </th>
+            <th>
+                <a href="#" onclick='filtrarFormulario(1, "institucion")'>Institución</a>
+            </th>
+            <th>
+                <a href="#" onclick='filtrarFormulario(1, "valorFinal");'>Porcentaje Intervención</a>
+            </th>
+            <th>
+                <a href="#" onclick='filtrarFormulario(1, "estado");'>Estado</a>
+            </th>
+            <th align="center">
+                Opciones
+            </th>
+        </tr>
+    </thead>
+    <tbody id="resultSearch"></tbody>
+</table>
+
+
+@section scripts{
+    <script>
+        $(function () {
+            $("#FechaLlenado").datepicker({
+                showButtonPanel: true,
+                showOtherMonths: true,
+                selectOtherMonths: true
+            });
+        });
+    </script>
+}

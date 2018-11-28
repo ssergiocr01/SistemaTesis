@@ -10,7 +10,7 @@ using SistemaTesis.Models;
 
 namespace SistemaTesis.Controllers
 {
-    //[Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador")]
     public class AsentamientosController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -48,11 +48,11 @@ namespace SistemaTesis.Controllers
             return asentamientoModels.getDistritos(cantonID);
         }
 
-        public List<IdentityError> agregarAsentamiento(int id, string nombre, int provincia, int canton, int distrito, string direccion, string coordenadas,
-            string nombrePropietario, string apellidosPropietario, int tipoDocumento, string numDocumento, string ocupacion, int numViviendas,
+        public List<IdentityError> agregarAsentamiento(int id, string nombre, int provincia, int canton, int distrito, string direccion, string longitud,
+            string latitud,string nombrePropietario, string apellidosPropietario, int tipoDocumento, string numDocumento, string ocupacion, int numViviendas,
             Boolean estado, string funcion)
         {
-            return asentamientoModels.agregarAsentamiento(id, nombre, provincia, canton, distrito, direccion, coordenadas, nombrePropietario,
+            return asentamientoModels.agregarAsentamiento(id, nombre, provincia, canton, distrito, direccion, longitud, latitud, nombrePropietario,
                 apellidosPropietario, tipoDocumento, numDocumento, ocupacion, numViviendas, estado, funcion);
         }
 
@@ -61,16 +61,16 @@ namespace SistemaTesis.Controllers
             return asentamientoModels.filtrarAsentamiento(numPagina, valor, order, funcion);
         }
 
-        public List<Asentamiento> getAsentamientos(int cantonID)
+        public List<Asentamiento> getAsentamientos(int asentamientoID)
         {
-            return asentamientoModels.getAsentamientos(cantonID);
+            return asentamientoModels.getAsentamientos(asentamientoID);
         }
 
-        public List<IdentityError> editarAsentamiento(int id, string nombre, int provincia, int canton, int distrito, string direccion, string coordenadas,
-            string nombrePropietario, string apellidosPropietario, int tipoDocumento, string numDocumento, string ocupacion, int numViviendas,
+        public List<IdentityError> editarAsentamiento(int id, string nombre, int provincia, int canton, int distrito, string direccion, string longitud,
+            string latitud, string nombrePropietario, string apellidosPropietario, int tipoDocumento, string numDocumento, string ocupacion, int numViviendas,
             Boolean estado, int funcion)
         {
-            return asentamientoModels.editarAsentamiento(id, nombre, provincia, canton, distrito, direccion, coordenadas, nombrePropietario, apellidosPropietario,
+            return asentamientoModels.editarAsentamiento(id, nombre, provincia, canton, distrito, direccion, longitud, latitud, nombrePropietario, apellidosPropietario,
                 tipoDocumento, numDocumento, ocupacion, numViviendas, estado, funcion);
         }
     }

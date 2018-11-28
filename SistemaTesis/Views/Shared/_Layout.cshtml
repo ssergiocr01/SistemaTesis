@@ -35,7 +35,9 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Inicio</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">Acerca de</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contacto</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Formulario</a></li>
+                    <li><a asp-area="" asp-controller="Formularios" asp-action="Index">Formulario</a></li>
+                    @if (User.IsInRole("Administrador"))
+                    {
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administración<b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -49,6 +51,7 @@
                             <li><a asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a></li>
                         </ul>
                     </li>
+                    }                    
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reportes<b class="caret"></b></a>
                         <ul class="dropdown-menu">

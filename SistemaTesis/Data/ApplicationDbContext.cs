@@ -38,5 +38,9 @@ namespace SistemaTesis.Data
         public DbSet<Amenaza> Amenaza { get; set; }
 
         public DbSet<SistemaTesis.Models.CatalogoAmenaza> CatalogoAmenaza { get; set; }
+
+        public DbSet<SistemaTesis.Models.Formulario> Formulario { get; set; }
+
+        public DbSet<SistemaTesis.Models.FormularioAmenaza> FormularioAmenaza { get; set; }
     }
 }

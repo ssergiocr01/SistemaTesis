@@ -18,7 +18,9 @@ namespace SistemaTesis.Models
         [Required(ErrorMessage = "El campo {0} es requerido")]
         public string Direccion { get; set; }
 
-        public string Coordenadas { get; set; }
+        public string Longitud { get; set; }
+
+        public string Latitud { get; set; }
 
         [Display(Name = "Nombre del Propietario")]
         [Required(ErrorMessage = "El campo {0} es requerido")]
@@ -63,6 +65,8 @@ namespace SistemaTesis.Models
         public Canton Canton { get; set; }
 
         public Distrito Distrito { get; set; }
+
+        public ICollection<Formulario> Formularios { get; set; }
 
     }
 }
